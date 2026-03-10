@@ -23,9 +23,9 @@
         header a { color: #ffcccc; text-decoration: none; font-weight: 600; transition: color 0.3s ease; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; }
         header a:hover { color: #fff; }
 
-        /* --- UPDATED: Featured Product Section --- */
+        /* Featured Product Section */
         .featured-product { 
-            background: #000000; /* Changed to pure black to match header */
+            background: #000000; 
             color: #fff; 
             padding: 5rem 2rem; 
             display: flex; 
@@ -147,12 +147,12 @@
         <h2 class="section-title">Divillian Apparel</h2>
         
         <div class="shop-controls">
-            <button class="filter-btn active" onclick="filterShop('all', this)">All</button>
-            <button class="filter-btn" onclick="filterShop('tshirt', this)">T-Shirts</button>
-            <button class="filter-btn" onclick="filterShop('hoodie', this)">Hoodies</button>
-            <button class="filter-btn" onclick="filterShop('socks', this)">Socks</button>
-            <button class="filter-btn" onclick="filterShop('caps', this)">Caps</button>
-            <button class="filter-btn" onclick="filterShop('other', this)">Other</button>
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="tshirt">T-Shirts</button>
+            <button class="filter-btn" data-filter="hoodie">Hoodies</button>
+            <button class="filter-btn" data-filter="socks">Socks</button>
+            <button class="filter-btn" data-filter="caps">Caps</button>
+            <button class="filter-btn" data-filter="other">Other</button>
         </div>
 
         <div class="shop-grid">
@@ -296,6 +296,31 @@
     </footer>
 
     <script>
-        function filterShop(category, clickedButton) {
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.filter-btn');
             const items = document.querySelectorAll('.shop-item');
-            const buttons =
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active from all buttons
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    // Add active to the clicked button
+                    button.classList.add('active');
+
+                    // Find out what category we are looking for
+                    const category = button.getAttribute('data-filter');
+
+                    // Show or hide items
+                    items.forEach(item => {
+                        if (category === 'all' || item.classList.contains(category)) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
