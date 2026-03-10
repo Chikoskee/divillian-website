@@ -62,7 +62,7 @@
 <body>
 
     <video class="full-width-media" autoplay loop muted playsinline>
-        <source src="Divillian-video.mp4" type="video/mp4">
+        <source src="DIVIDEO.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -228,21 +228,17 @@
 
     <script>
         function filterShop(category, clickedButton) {
-            // Get all products and all buttons
             const items = document.querySelectorAll('.shop-item');
             const buttons = document.querySelectorAll('.filter-btn');
             
-            // Remove the "active" color from all buttons, then add it to the clicked one
             buttons.forEach(btn => btn.classList.remove('active'));
             clickedButton.classList.add('active');
 
-            // Show or hide items based on the category
             items.forEach(item => {
-                // If we clicked "all" OR the item has the class we clicked (like "tshirt")
                 if (category === 'all' || item.classList.contains(category)) {
-                    item.classList.remove('hidden'); // Show it
+                    item.classList.remove('hidden');
                 } else {
-                    item.classList.add('hidden'); // Hide it
+                    item.classList.add('hidden');
                 }
             });
         }
