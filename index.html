@@ -23,9 +23,9 @@
         header a { color: #ffcccc; text-decoration: none; font-weight: 600; transition: color 0.3s ease; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; }
         header a:hover { color: #fff; }
 
-        /* --- NEW: Featured Product Section --- */
+        /* --- UPDATED: Featured Product Section --- */
         .featured-product { 
-            background: #111; /* Dark background to make the sauce pop */
+            background: #000000; /* Changed to pure black to match header */
             color: #fff; 
             padding: 5rem 2rem; 
             display: flex; 
@@ -298,19 +298,4 @@
     <script>
         function filterShop(category, clickedButton) {
             const items = document.querySelectorAll('.shop-item');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            buttons.forEach(btn => btn.classList.remove('active'));
-            clickedButton.classList.add('active');
-
-            items.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+            const buttons =
