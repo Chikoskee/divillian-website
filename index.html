@@ -7,23 +7,26 @@
     <style>
         /* Base Settings */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
-        body { line-height: 1.6; color: #333; background-color: #fcfcfc; }
+        body { line-height: 1.6; color: #333; background-color: #fff5f5; /* Light red tinted background */ }
         
+        /* Media Elements (Full Width) */
+        .full-width-media { width: 100%; display: block; object-fit: cover; }
+
         /* Header & Navigation */
-        header { background: #111; color: #fff; padding: 1.5rem 0; text-align: center; }
+        header { background: #8b0000; color: #fff; padding: 1.5rem 0; text-align: center; } /* Dark Red */
         header h2 { letter-spacing: 2px; text-transform: uppercase; }
         header nav { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 15px; }
-        header a { color: #e74c3c; text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
+        header a { color: #ffcccc; text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
         header a:hover { color: #fff; }
 
         /* Hero Section */
-        .hero { background: #e74c3c; color: white; padding: 5rem 1rem; text-align: center; }
+        .hero { background: #d32f2f; color: white; padding: 5rem 1rem; text-align: center; } /* Strong Red */
         .hero h1 { font-size: 2.8rem; margin-bottom: 15px; }
         .hero p { font-size: 1.2rem; max-width: 600px; margin: auto; }
 
         /* Main Content & Products */
         .container { padding: 3rem 1rem; max-width: 1200px; margin: auto; }
-        .section-title { text-align: center; margin-bottom: 2.5rem; font-size: 2rem; }
+        .section-title { text-align: center; margin-bottom: 2.5rem; font-size: 2rem; color: #8b0000; }
         .products { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
         .product-card { 
             background: #fff; 
@@ -31,13 +34,13 @@
             border-radius: 10px; 
             width: 320px; 
             text-align: center; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
-            border-top: 4px solid #111;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            border-top: 4px solid #d32f2f; /* Red top border */
         }
-        .product-card h3 { margin-bottom: 10px; color: #111; }
+        .product-card h3 { margin-bottom: 10px; color: #8b0000; }
 
         /* Footer */
-        footer { background: #111; color: #aaa; text-align: center; padding: 2rem 0; margin-top: 2rem; }
+        footer { background: #8b0000; color: #ffcccc; text-align: center; padding: 2rem 0; margin-top: 2rem; }
 
         /* Mobile Responsiveness */
         @media (max-width: 600px) {
@@ -47,6 +50,13 @@
     </style>
 </head>
 <body>
+
+    <video class="full-width-media" autoplay loop muted playsinline>
+        <source src="Divillian video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <img src="Divillian tagline.png" alt="Divillian Tagline" class="full-width-media">
 
     <header>
         <h2>Divillian</h2>
