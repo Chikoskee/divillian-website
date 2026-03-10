@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Base Settings (Updated to the new modern font) */
+        /* Base Settings */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         body { line-height: 1.6; color: #333; background-color: #fff5f5; }
         
@@ -23,9 +23,38 @@
         header a { color: #ffcccc; text-decoration: none; font-weight: 600; transition: color 0.3s ease; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; }
         header a:hover { color: #fff; }
 
+        /* --- NEW: Featured Product Section --- */
+        .featured-product { 
+            background: #111; /* Dark background to make the sauce pop */
+            color: #fff; 
+            padding: 5rem 2rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 50px; 
+            flex-wrap: wrap; 
+        }
+        .featured-image { flex: 1; max-width: 450px; }
+        .featured-image img { 
+            width: 100%; 
+            border-radius: 12px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
+            border: 3px solid #8b0000; 
+        }
+        .featured-text { flex: 1; max-width: 500px; }
+        .featured-text h2 { color: #d32f2f; text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem; margin-bottom: 10px; }
+        .featured-text h3 { font-size: 2.8rem; margin-bottom: 20px; line-height: 1.2; }
+        .featured-text p { color: #ddd; margin-bottom: 30px; font-size: 1.1rem; }
+        .featured-btn { 
+            background: #d32f2f; color: white; border: none; padding: 15px 35px; 
+            font-size: 1.1rem; border-radius: 5px; cursor: pointer; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 1px; transition: background 0.3s; 
+        }
+        .featured-btn:hover { background: #ffcccc; color: #8b0000; }
+
         /* Main Content & Collections */
-        .container { padding: 3rem 1rem; max-width: 1200px; margin: auto; }
-        .section-title { text-align: center; margin-bottom: 2.5rem; font-size: 2.2rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+        .container { padding: 4rem 1rem; max-width: 1200px; margin: auto; }
+        .section-title { text-align: center; margin-bottom: 3rem; font-size: 2.2rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
         
         .collections { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
         .collection-card { 
@@ -59,8 +88,9 @@
         footer { background: #8b0000; color: #ffcccc; text-align: center; padding: 2rem 0; margin-top: 2rem; }
 
         /* Mobile Responsiveness */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             header nav { gap: 15px; }
+            .featured-product { flex-direction: column; text-align: center; padding: 3rem 1rem; }
         }
     </style>
 </head>
@@ -78,10 +108,22 @@
             <a href="#collections">Collections</a>
             <a href="#apparel-shop">Apparel</a>
             <a href="#food">Food</a>
-            <a href="#sauces">Hot Sauces</a>
+            <a href="#hot-sauces">Hot Sauces</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
+
+    <section class="featured-product" id="hot-sauces">
+        <div class="featured-image">
+            <img src="HouseSauce.png" alt="Divillian House Hot Sauce">
+        </div>
+        <div class="featured-text">
+            <h2>Featured Product</h2>
+            <h3>Divillian House Sauce</h3>
+            <p>Our signature face-melting blend crafted right here in New Jersey. Made with locally sourced peppers and a secret mix of spices, it starts with a tangy kick and ends with an absolute fire that will leave you wanting more. Perfect for wings, tacos, or anything that needs a serious flavor upgrade.</p>
+            <button class="featured-btn">Buy Now - $12.00</button>
+        </div>
+    </section>
 
     <div class="container" id="collections">
         <h2 class="section-title">Our Collections</h2>
