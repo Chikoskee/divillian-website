@@ -46,20 +46,16 @@
         .buy-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: 700; text-transform: uppercase; }
         .buy-btn:hover { background: #8b0000; }
         
-        /* Hidden class for filtering */
         .hidden { display: none !important; }
 
-        /* Sections */
+        /* About Section */
         .about-text { max-width: 800px; margin: 0 auto; text-align: center; padding-bottom: 2rem; }
         .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #444; line-height: 1.8; }
         
-        /* Media Section - UPDATED TO 3-COLUMN GRID */
+        /* Media Section */
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
         .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
-        
-        /* Adjusted width for three videos */
         .media-video { width: 100%; max-width: 380px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        
         .spinning-logo-container { margin-top: 20px; }
         .spinning-logo-container img { max-width: 250px; height: auto; }
 
@@ -70,9 +66,9 @@
 
     <div id="home">
         <video class="full-width-media" autoplay loop muted playsinline>
-            <source src="DIVIDEO.mp4" type="video/mp4">
+            <source src="MainVideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
-        <img src="Divillian-tagline.png" alt="Divil’Lian Tagline" class="full-width-media">
     </div>
 
     <header>
@@ -96,35 +92,15 @@
     <div class="container" id="apparel-shop">
         <h2 class="section-title">Collections</h2>
         <div class="shop-grid">
-            
             <div class="shop-item skimask">
                 <img src="SkiMask-2.jpg" alt="Divil’Lian Ski Mask">
                 <h4>Signature Ski Mask</h4>
                 <p class="price">$30.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
-
             <div class="shop-item tshirt">
                 <img src="BlackTshirt.png" alt="Black Tee">
                 <h4>Classic Black Tee</h4>
-                <p class="price">$25.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item tshirt">
-                <img src="GreenTshirt.png" alt="Green Tee">
-                <h4>Forest Green Tee</h4>
-                <p class="price">$25.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item tshirt">
-                <img src="MaroonTshirt.png" alt="Maroon Tee">
-                <h4>Deep Maroon Tee</h4>
-                <p class="price">$25.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item tshirt">
-                <img src="PinkTshirt.png" alt="Pink Tee">
-                <h4>Vibrant Pink Tee</h4>
                 <p class="price">$25.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
@@ -134,46 +110,25 @@
                 <p class="price">$25.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
-
             <div class="shop-item hoodie">
                 <img src="GreenHoodie.png" alt="Green Hoodie">
                 <h4>Green Hoodie</h4>
                 <p class="price">$55.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
-            <div class="shop-item hoodie">
-                <img src="GreyHoodie.png" alt="Grey Hoodie">
-                <h4>Grey Hoodie</h4>
-                <p class="price">$55.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
             <div class="shop-item socks">
                 <img src="Blacksocks.png" alt="Black Socks">
                 <h4>Black Socks</h4>
                 <p class="price">$15.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
-            <div class="shop-item socks">
-                <img src="Redsocks.png" alt="Red Socks">
-                <h4>Red Socks</h4>
-                <p class="price">$15.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item socks">
-                <img src="Whitesocks.png" alt="White Socks">
-                <h4>White Socks</h4>
-                <p class="price">$15.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
         </div>
     </div>
 
     <div id="about" class="container">
         <h2 class="section-title">About Divil’Lian</h2>
         <div class="about-text">
-            <p>Proudly based in New Jersey, USA. We specialize in apparel, gourmet food, and small-batch hot sauces.</p>
+            <p>Born in the heart of New Jersey, Divil’Lian is more than just a brand; it’s a tribute to the bold and the authentic.</p>
             <p>We invite you to join a community that values quality, local craftsmanship, and a touch of fire in everything we do.</p>
         </div>
     </div>
@@ -197,7 +152,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Divil’Lian. New Jersey, USA.</p>
+        <p id="contact">&copy; 2026 Divil’Lian. New Jersey, USA.</p>
     </footer>
 
     <script>
