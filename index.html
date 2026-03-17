@@ -52,18 +52,23 @@
         .about-text { max-width: 800px; margin: 0 auto; text-align: center; padding-bottom: 2rem; }
         .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #444; line-height: 1.8; }
 
-        /* Media Section */
+        /* Media Section - UPDATED VIDEO SIZE */
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
-        .video-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
-        .media-video { width: 100%; max-width: 500px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
+        
+        /* Increased max-width by 20% (from 500px to 600px) */
+        .media-video { width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); outline: none; }
+        
         .spinning-logo-container { margin-top: 20px; }
         .spinning-logo-container img { max-width: 250px; height: auto; }
 
         footer { background: #8b0000; color: #ffcccc; text-align: center; padding: 2rem 0; }
 
-        /* Mobile Adjustments */
+        /* Mobile Adjustments - UPDATED */
         @media (max-width: 768px) {
-            .media-video { max-width: 90%; }
+            /* On mobile, allow the bigger videos to fill more width */
+            .media-video { max-width: 95%; }
+            .video-grid { gap: 20px; }
         }
     </style>
 </head>
@@ -142,11 +147,13 @@
         <h2 class="section-title">Media</h2>
         
         <div class="video-grid">
-            <video class="media-video" autoplay loop muted playsinline>
+            <video class="media-video" controls playsinline>
                 <source src="Samplevideo1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
-            <video class="media-video" autoplay loop muted playsinline>
+            <video class="media-video" controls playsinline>
                 <source src="Samplevideo2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
         </div>
 
