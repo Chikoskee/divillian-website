@@ -55,18 +55,16 @@
         
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
         .shop-item { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
-        .shop-item img { max-width: 100%; border-radius: 8px; margin-bottom: 15px; background: #f9f9f9; }
+        .shop-item img { max-width: 100%; border-radius: 8px; margin-bottom: 15px; background: #f9f9f9; height: 250px; object-fit: contain; width: 100%; }
         .shop-item .price { color: #d32f2f; font-weight: 700; font-size: 1.2rem; margin-bottom: 10px; }
         .buy-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: 700; text-transform: uppercase; transition: background 0.3s; }
         .buy-btn:hover { background: #d32f2f; }
         
         .hidden { display: none !important; }
 
-        /* About Section */
+        /* About & Media Sections */
         .about-text { max-width: 800px; margin: 0 auto; text-align: center; padding-bottom: 4rem; }
         .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #444; line-height: 1.8; }
-
-        /* Media Section */
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; }
         .media-section img { max-width: 300px; height: auto; margin-top: 20px; }
 
@@ -90,6 +88,8 @@
                 <div class="dropdown-content">
                     <a onclick="filterShop('tshirt')">T-Shirts</a>
                     <a onclick="filterShop('hoodie')">Hoodies</a>
+                    <a onclick="filterShop('tanktop')">Tank Tops</a>
+                    <a onclick="filterShop('buckethat')">Bucket Hats</a>
                     <a onclick="filterShop('socks')">Socks</a>
                     <a onclick="filterShop('mug')">Coffee Mugs</a>
                     <a onclick="filterShop('cap')">Caps</a>
@@ -116,22 +116,44 @@
                 <p class="price">$25.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
+
+            <div class="shop-item tanktop">
+                <img src="tank top black.jpg" alt="Black Tank Top">
+                <h4>Black Tank Top</h4>
+                <p class="price">$22.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="shop-item tanktop">
+                <img src="tank top pink.jpg" alt="Pink Tank Top">
+                <h4>Pink Tank Top</h4>
+                <p class="price">$22.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+
+            <div class="shop-item buckethat">
+                <img src="bucket hat black.jpg" alt="Black Bucket Hat">
+                <h4>Black Bucket Hat</h4>
+                <p class="price">$28.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="shop-item buckethat">
+                <img src="bucket hat.jpg" alt="Signature Bucket Hat">
+                <h4>Signature Bucket Hat</h4>
+                <p class="price">$28.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+
             <div class="shop-item hoodie">
                 <img src="GreenHoodie.png" alt="Green Hoodie">
                 <h4>Green Hoodie</h4>
                 <p class="price">$55.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
+
             <div class="shop-item socks">
                 <img src="Blacksocks.png" alt="Black Socks">
                 <h4>Black Socks</h4>
                 <p class="price">$15.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item mug">
-                <div style="height:200px; display:flex; align-items:center; justify-content:center; background:#eee; border-radius:8px; margin-bottom:15px; color:#999;">Coming Soon</div>
-                <h4>Divil’Lian Mug</h4>
-                <p class="price">$18.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
         </div>
@@ -140,12 +162,8 @@
     <div id="about" class="container">
         <h2 class="section-title">About Divil’Lian</h2>
         <div class="about-text">
-            <p>
-                Born in the heart of New Jersey, Divil’Lian is more than just a brand; it’s a tribute to the bold and the authentic. We started with a simple mission to merge high-quality streetwear with the unique, gritty flavors of the East Coast. From the fabrics we select for our apparel to the small-batch ingredients in our signature hot sauces, every product is a reflection of our commitment to excellence and our roots in the Garden State.
-            </p>
-            <p>
-                We believe that what you wear and what you consume should tell a story. Whether you’re rocking our classic hoodies on a crisp evening or bringing the heat to your dinner table with our gourmet blends, Divil’Lian is here to elevate your lifestyle. We invite you to explore our collections and join a community that values quality, local craftsmanship, and a touch of fire in everything we do.
-            </p>
+            <p>Born in the heart of New Jersey, Divil’Lian is more than just a brand; it’s a tribute to the bold and the authentic. We started with a simple mission to merge high-quality streetwear with the unique, gritty flavors of the East Coast.</p>
+            <p>We believe that what you wear and what you consume should tell a story. Whether you’re rocking our signature bucket hats or bringing the heat with our gourmet blends, Divil’Lian is here to elevate your lifestyle.</p>
         </div>
     </div>
 
