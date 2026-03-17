@@ -39,37 +39,26 @@
         
         /* Shop Grid */
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .shop-item { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
+        .shop-item { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; display: block; }
         .shop-item img { width: 100%; height: 280px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; background: #f9f9f9; }
         .shop-item h4 { font-weight: 600; margin-bottom: 5px; font-size: 1rem; min-height: 40px; }
         .shop-item .price { color: #d32f2f; font-weight: 700; font-size: 1.2rem; margin-bottom: 10px; }
         .buy-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: 700; text-transform: uppercase; }
         .buy-btn:hover { background: #8b0000; }
         
+        /* Hidden class for filtering */
         .hidden { display: none !important; }
 
-        /* About Section */
+        /* Sections */
         .about-text { max-width: 800px; margin: 0 auto; text-align: center; padding-bottom: 2rem; }
         .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #444; line-height: 1.8; }
-
-        /* Media Section - UPDATED VIDEO SIZE */
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
         .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
-        
-        /* Increased max-width by 20% (from 500px to 600px) */
-        .media-video { width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); outline: none; }
-        
+        .media-video { width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .spinning-logo-container { margin-top: 20px; }
         .spinning-logo-container img { max-width: 250px; height: auto; }
 
         footer { background: #8b0000; color: #ffcccc; text-align: center; padding: 2rem 0; }
-
-        /* Mobile Adjustments - UPDATED */
-        @media (max-width: 768px) {
-            /* On mobile, allow the bigger videos to fill more width */
-            .media-video { max-width: 95%; }
-            .video-grid { gap: 20px; }
-        }
     </style>
 </head>
 <body>
@@ -100,17 +89,37 @@
     </header>
 
     <div class="container" id="apparel-shop">
-        <h2 class="section-title">Collections</h2>
+        <h2 class="section-title">Full Collection</h2>
         <div class="shop-grid">
+            
             <div class="shop-item skimask">
                 <img src="SkiMask-2.jpg" alt="Divil’Lian Ski Mask">
                 <h4>Signature Ski Mask</h4>
                 <p class="price">$30.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
+
             <div class="shop-item tshirt">
                 <img src="BlackTshirt.png" alt="Black Tee">
                 <h4>Classic Black Tee</h4>
+                <p class="price">$25.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="shop-item tshirt">
+                <img src="GreenTshirt.png" alt="Green Tee">
+                <h4>Forest Green Tee</h4>
+                <p class="price">$25.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="shop-item tshirt">
+                <img src="MaroonTshirt.png" alt="Maroon Tee">
+                <h4>Deep Maroon Tee</h4>
+                <p class="price">$25.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="shop-item tshirt">
+                <img src="PinkTshirt.png" alt="Pink Tee">
+                <h4>Vibrant Pink Tee</h4>
                 <p class="price">$25.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
@@ -120,18 +129,39 @@
                 <p class="price">$25.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
+
             <div class="shop-item hoodie">
                 <img src="GreenHoodie.png" alt="Green Hoodie">
-                <h4>Green Hoodie</h4>
+                <h4>Divil’Lian Green Hoodie</h4>
                 <p class="price">$55.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
+            <div class="shop-item hoodie">
+                <img src="GreyHoodie.png" alt="Grey Hoodie">
+                <h4>Divil’Lian Grey Hoodie</h4>
+                <p class="price">$55.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+
             <div class="shop-item socks">
                 <img src="Blacksocks.png" alt="Black Socks">
-                <h4>Black Socks</h4>
+                <h4>Divil’Lian Black Socks</h4>
                 <p class="price">$15.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
+            <div class="shop-item socks">
+                <img src="Redsocks.png" alt="Red Socks">
+                <h4>Divil’Lian Red Socks</h4>
+                <p class="price">$15.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="shop-item socks">
+                <img src="Whitesocks.png" alt="White Socks">
+                <h4>Divil’Lian White Socks</h4>
+                <p class="price">$15.00</p>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+
         </div>
     </div>
 
@@ -145,18 +175,14 @@
 
     <section id="media" class="media-section">
         <h2 class="section-title">Media</h2>
-        
         <div class="video-grid">
             <video class="media-video" controls playsinline>
                 <source src="Samplevideo1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
             <video class="media-video" controls playsinline>
                 <source src="Samplevideo2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
         </div>
-
         <div class="spinning-logo-container">
             <img src="spinninglogo.gif" alt="Divil’Lian Spinning Logo">
         </div>
@@ -176,7 +202,10 @@
                     item.classList.add('hidden');
                 }
             });
-            document.getElementById('apparel-shop').scrollIntoView({ behavior: 'smooth' });
+            // Auto-scroll to shop when a category is chosen
+            if (category !== 'all') {
+                document.getElementById('apparel-shop').scrollIntoView({ behavior: 'smooth' });
+            }
         }
     </script>
 </body>
