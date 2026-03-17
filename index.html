@@ -55,8 +55,7 @@
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
         .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
         .media-video { width: 100%; max-width: 380px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .spinning-logo-container { margin-top: 20px; }
-        .spinning-logo-container img { max-width: 250px; height: auto; }
+        .spinning-logo-container img { max-width: 250px; height: auto; margin-top: 20px; }
 
         footer { background: #8b0000; color: #ffcccc; text-align: center; padding: 2rem 0; }
     </style>
@@ -64,7 +63,7 @@
 <body>
 
     <div id="home">
-        <video class="full-width-media" autoplay loop playsinline>
+        <video class="full-width-media" autoplay loop muted playsinline>
             <source src="DevTopvideo.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -93,102 +92,21 @@
     <div class="container" id="apparel-shop">
         <h2 class="section-title">Full Collection</h2>
         <div class="shop-grid">
-            
-            <div class="shop-item skimask">
-                <img src="SkiMask-2.jpg" alt="Ski Mask">
-                <h4>Signature Ski Mask</h4>
-                <p class="price">$30.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
-            <div class="shop-item facemask">
-                <img src="FaceMask-black.jpg" alt="Black Face Mask">
-                <h4>Black Face Mask</h4>
-                <p class="price">$15.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item facemask">
-                <img src="FaceMask-white.jpg" alt="White Face Mask">
-                <h4>White Face Mask</h4>
-                <p class="price">$15.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
-            <div class="shop-item buckethat">
-                <img src="buckethat-black.jpg" alt="Black Bucket Hat">
-                <h4>Black Bucket Hat</h4>
-                <p class="price">$28.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item buckethat">
-                <img src="buckethat-white.jpg" alt="White Bucket Hat">
-                <h4>White Bucket Hat</h4>
-                <p class="price">$28.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
-            <div class="shop-item tshirt">
-                <img src="BlackTshirt.png" alt="Black Tee">
-                <h4>Classic Black Tee</h4>
-                <p class="price">$25.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item tshirt">
-                <img src="GreenTshirt.png" alt="Green Tee">
-                <h4>Forest Green Tee</h4>
-                <p class="price">$25.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item tshirt">
-                <img src="MaroonTshirt.png" alt="Maroon Tee">
-                <h4>Deep Maroon Tee</h4>
-                <p class="price">$25.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item tshirt">
-                <img src="PinkTshirt.png" alt="Pink Tee">
-                <h4>Vibrant Pink Tee</h4>
-                <p class="price">$25.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item tshirt">
-                <img src="WhiteTshirt.png" alt="White Tee">
-                <h4>Classic White Tee</h4>
-                <p class="price">$25.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
-            <div class="shop-item hoodie">
-                <img src="GreenHoodie.png" alt="Green Hoodie">
-                <h4>Green Hoodie</h4>
-                <p class="price">$55.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item hoodie">
-                <img src="GreyHoodie.png" alt="Grey Hoodie">
-                <h4>Grey Hoodie</h4>
-                <p class="price">$55.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
-            <div class="shop-item socks">
-                <img src="Blacksocks.png" alt="Black Socks">
-                <h4>Black Socks</h4>
-                <p class="price">$15.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item socks">
-                <img src="Redsocks.png" alt="Red Socks">
-                <h4>Red Socks</h4>
-                <p class="price">$15.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="shop-item socks">
-                <img src="Whitesocks.png" alt="White Socks">
-                <h4>White Socks</h4>
-                <p class="price">$15.00</p>
-                <button class="buy-btn">Buy Now</button>
-            </div>
+            <div class="shop-item skimask"><img src="SkiMask-2.jpg"><h4>Signature Ski Mask</h4><p class="price">$30.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item facemask"><img src="FaceMask-black.jpg"><h4>Black Face Mask</h4><p class="price">$15.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item facemask"><img src="FaceMask-white.jpg"><h4>White Face Mask</h4><p class="price">$15.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item buckethat"><img src="buckethat-black.jpg"><h4>Black Bucket Hat</h4><p class="price">$28.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item buckethat"><img src="buckethat-white.jpg"><h4>White Bucket Hat</h4><p class="price">$28.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item tshirt"><img src="BlackTshirt.png"><h4>Classic Black Tee</h4><p class="price">$25.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item tshirt"><img src="GreenTshirt.png"><h4>Green Tee</h4><p class="price">$25.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item tshirt"><img src="MaroonTshirt.png"><h4>Maroon Tee</h4><p class="price">$25.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item tshirt"><img src="PinkTshirt.png"><h4>Pink Tee</h4><p class="price">$25.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item tshirt"><img src="WhiteTshirt.png"><h4>White Tee</h4><p class="price">$25.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item hoodie"><img src="GreenHoodie.png"><h4>Green Hoodie</h4><p class="price">$55.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item hoodie"><img src="GreyHoodie.png"><h4>Grey Hoodie</h4><p class="price">$55.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item socks"><img src="Blacksocks.png"><h4>Black Socks</h4><p class="price">$15.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item socks"><img src="Redsocks.png"><h4>Red Socks</h4><p class="price">$15.00</p><button class="buy-btn">Buy Now</button></div>
+            <div class="shop-item socks"><img src="Whitesocks.png"><h4>White Socks</h4><p class="price">$15.00</p><button class="buy-btn">Buy Now</button></div>
         </div>
     </div>
 
@@ -207,15 +125,9 @@
     <section id="media" class="media-section">
         <h2 class="section-title">Media</h2>
         <div class="video-grid">
-            <video class="media-video" controls playsinline>
-                <source src="Samplevideo1.mp4" type="video/mp4">
-            </video>
-            <video class="media-video" controls playsinline>
-                <source src="Samplevideo2.mp4" type="video/mp4">
-            </video>
-            <video class="media-video" controls playsinline>
-                <source src="SampleVideo3.mp4" type="video/mp4">
-            </video>
+            <video class="media-video" controls playsinline><source src="Samplevideo1.mp4" type="video/mp4"></video>
+            <video class="media-video" controls playsinline><source src="Samplevideo2.mp4" type="video/mp4"></video>
+            <video class="media-video" controls playsinline><source src="SampleVideo3.mp4" type="video/mp4"></video>
         </div>
         <div class="spinning-logo-container">
             <img src="spinninglogo.gif" alt="Spinning Logo">
