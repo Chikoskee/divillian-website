@@ -14,7 +14,19 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         body { line-height: 1.6; color: #333; background-color: #fff5f5; overflow-x: hidden; scroll-behavior: smooth; }
         
+        /* Hero Video Section */
+        #home { position: relative; width: 100%; background: #000; }
         .full-width-media { width: 100%; display: block; object-fit: cover; }
+
+        /* Mute/Unmute Button Style */
+        .mute-btn {
+            position: absolute; bottom: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.5); color: white; border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 15px; border-radius: 30px; cursor: pointer;
+            font-size: 0.8rem; font-weight: 600; z-index: 10;
+            display: flex; align-items: center; gap: 8px; transition: background 0.3s;
+        }
+        .mute-btn:hover { background: #8b0000; }
 
         /* Header & Navigation */
         header { background: #000000; color: #fff; padding: 1rem 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
@@ -33,10 +45,9 @@
         .dropdown-content a:hover { background-color: #8b0000; color: #fff; }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* Shop Grid */
+        /* Grid Settings */
         .container { padding: 4rem 1rem; max-width: 1200px; margin: auto; }
         .section-title { text-align: center; margin-bottom: 2rem; font-size: 2.2rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
-        
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
         .shop-item { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; display: block; }
         .shop-item img { width: 100%; height: 280px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; background: #f9f9f9; }
@@ -44,14 +55,11 @@
         .shop-item .price { color: #d32f2f; font-weight: 700; font-size: 1.2rem; margin-bottom: 10px; }
         .buy-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: 700; text-transform: uppercase; }
         .buy-btn:hover { background: #8b0000; }
-        
         .hidden { display: none !important; }
 
-        /* About Section */
+        /* Sections */
         .about-text { max-width: 850px; margin: 0 auto; text-align: center; padding-bottom: 2rem; }
         .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #444; line-height: 1.8; }
-        
-        /* Media Section */
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
         .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
         .media-video { width: 100%; max-width: 380px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
@@ -63,9 +71,11 @@
 <body>
 
     <div id="home">
-        <video class="full-width-media" autoplay loop muted playsinline>
+        <button class="mute-btn" onclick="toggleMute()">
+            <span id="mute-icon">🔇</span> <span id="mute-text">Unmute</span>
+        </button>
+        <video id="hero-video" class="full-width-media" autoplay loop muted playsinline>
             <source src="DevTopvideo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
     </div>
 
@@ -113,12 +123,8 @@
     <div id="about" class="container">
         <h2 class="section-title">About Divil’Lian</h2>
         <div class="about-text">
-            <p>
-                Born in the heart of New Jersey, Divil’Lian is more than just a brand; it’s a tribute to the bold, the authentic, and the resilient spirit of the East Coast. We started with a singular mission: to merge high-quality streetwear with the unique, gritty flavors that define our home. From the premium fabrics we source for our apparel to the small-batch ingredients in our signature hot sauces, every product is a reflection of our deep roots in the Garden State and our commitment to absolute excellence.
-            </p>
-            <p>
-                We believe that what you wear and what you consume should tell a powerful story. Whether you’re rocking our classic tees on a crisp New Jersey evening or bringing the heat to your dinner table with our gourmet blends, Divil’Lian is designed to elevate your everyday lifestyle. We invite you to explore our collections and join a community that values quality, local craftsmanship, and a touch of fire in everything we do.
-            </p>
+            <p>Born in the heart of New Jersey, Divil’Lian is more than just a brand; it’s a tribute to the bold, the authentic, and the resilient spirit of the East Coast. We started with a singular mission: to merge high-quality streetwear with the unique, gritty flavors that define our home. From the premium fabrics we source for our apparel to the small-batch ingredients in our signature hot sauces, every product is a reflection of our deep roots in the Garden State and our commitment to absolute excellence.</p>
+            <p>We believe that what you wear and what you consume should tell a powerful story. Whether you’re rocking our classic tees on a crisp New Jersey evening or bringing the heat to your dinner table with our gourmet blends, Divil’Lian is designed to elevate your everyday lifestyle. We invite you to explore our collections and join a community that values quality, local craftsmanship, and a touch of fire in everything we do.</p>
         </div>
     </div>
 
@@ -129,16 +135,29 @@
             <video class="media-video" controls playsinline><source src="Samplevideo2.mp4" type="video/mp4"></video>
             <video class="media-video" controls playsinline><source src="SampleVideo3.mp4" type="video/mp4"></video>
         </div>
-        <div class="spinning-logo-container">
-            <img src="spinninglogo.gif" alt="Spinning Logo">
-        </div>
+        <div class="spinning-logo-container"><img src="spinninglogo.gif" alt="Spinning Logo"></div>
     </section>
 
-    <footer>
-        <p id="contact">&copy; 2026 Divil’Lian. New Jersey, USA.</p>
-    </footer>
+    <footer><p id="contact">&copy; 2026 Divil’Lian. New Jersey, USA.</p></footer>
 
     <script>
+        // Mute Toggle Logic
+        function toggleMute() {
+            const video = document.getElementById('hero-video');
+            const icon = document.getElementById('mute-icon');
+            const text = document.getElementById('mute-text');
+            if (video.muted) {
+                video.muted = false;
+                icon.innerText = '🔊';
+                text.innerText = 'Mute';
+            } else {
+                video.muted = true;
+                icon.innerText = '🔇';
+                text.innerText = 'Unmute';
+            }
+        }
+
+        // Shop Filtering
         function filterShop(category) {
             const items = document.querySelectorAll('.shop-item');
             items.forEach(item => {
