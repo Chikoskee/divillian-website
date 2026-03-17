@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Divillian | Apparel, Food & Hot Sauces</title>
+    <title>Divil’Lian | Apparel, Food & Hot Sauces</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,63 +12,57 @@
     <style>
         /* Base Settings */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { line-height: 1.6; color: #333; background-color: #fff5f5; }
+        body { line-height: 1.6; color: #333; background-color: #fff5f5; overflow-x: hidden; scroll-behavior: smooth; }
         
         /* Media Elements */
         .full-width-media { width: 100%; display: block; object-fit: cover; }
 
         /* Header & Navigation */
-        header { background: #000000; color: #fff; padding: 1.5rem 0; text-align: center; }
-        header nav { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+        header { background: #000000; color: #fff; padding: 1rem 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        header nav { display: flex; justify-content: center; gap: 25px; align-items: center; flex-wrap: wrap; }
         header a { color: #ffcccc; text-decoration: none; font-weight: 600; transition: color 0.3s ease; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; }
         header a:hover { color: #fff; }
 
+        /* Dropdown Menu Logic */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #111;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            text-align: left;
+            margin-top: 10px;
+        }
+        .dropdown-content a {
+            color: #ffcccc;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.8rem;
+            border-bottom: 1px solid #222;
+        }
+        .dropdown-content a:hover { background-color: #8b0000; color: #fff; }
+        .dropdown:hover .dropdown-content { display: block; }
+
         /* Featured Product Section */
-        .featured-product { 
-            background: #000000; 
-            color: #fff; 
-            padding: 5rem 2rem; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 50px; 
-            flex-wrap: wrap; 
-        }
+        .featured-product { background: #000000; color: #fff; padding: 5rem 2rem; display: flex; align-items: center; justify-content: center; gap: 50px; flex-wrap: wrap; }
         .featured-image { flex: 1; max-width: 450px; }
-        .featured-image img { 
-            width: 100%; 
-            border-radius: 12px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
-            border: 3px solid #8b0000; 
-        }
+        .featured-image img { width: 100%; border-radius: 12px; border: 3px solid #8b0000; box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
         .featured-text { flex: 1; max-width: 500px; }
         .featured-text h2 { color: #d32f2f; text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem; margin-bottom: 10px; }
         .featured-text h3 { font-size: 2.8rem; margin-bottom: 20px; line-height: 1.2; }
         .featured-text p { color: #ddd; margin-bottom: 30px; font-size: 1.1rem; }
-        .featured-btn { 
-            background: #d32f2f; color: white; border: none; padding: 15px 35px; 
-            font-size: 1.1rem; border-radius: 5px; cursor: pointer; font-weight: 700; 
-            text-transform: uppercase; letter-spacing: 1px; transition: background 0.3s; 
-        }
+        .featured-btn { background: #d32f2f; color: white; border: none; padding: 15px 35px; font-size: 1.1rem; border-radius: 5px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: background 0.3s; }
         .featured-btn:hover { background: #ffcccc; color: #8b0000; }
 
-        /* Main Content & Collections */
+        /* Apparel Shop */
         .container { padding: 4rem 1rem; max-width: 1200px; margin: auto; }
         .section-title { text-align: center; margin-bottom: 3rem; font-size: 2.2rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
         
-        .collections { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
-        .collection-card { 
-            background: #fff; padding: 30px; border-radius: 10px; width: 320px; text-align: center; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-top: 4px solid #d32f2f; 
-        }
-        .collection-card h3 { margin-bottom: 10px; color: #8b0000; font-weight: 700; }
-
-        /* Apparel Shop Section */
         .shop-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
-        .filter-btn { 
-            padding: 8px 16px; border: 2px solid #8b0000; background: transparent; 
-            color: #8b0000; cursor: pointer; border-radius: 5px; font-weight: 600; transition: all 0.3s; 
-        }
+        .filter-btn { padding: 8px 16px; border: 2px solid #8b0000; background: transparent; color: #8b0000; cursor: pointer; border-radius: 5px; font-weight: 600; transition: all 0.3s; }
         .filter-btn:hover, .filter-btn.active { background: #8b0000; color: white; }
         
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
@@ -78,260 +72,151 @@
         .shop-item .price { color: #d32f2f; font-weight: 700; margin-bottom: 15px; font-size: 1.2rem; }
         
         .shop-item select { padding: 8px; margin-bottom: 15px; width: 100%; border: 1px solid #ccc; border-radius: 4px; font-size: 0.9rem; font-family: 'Montserrat', sans-serif; }
-        .buy-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: 700; transition: background 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .buy-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: background 0.3s; }
         .buy-btn:hover { background: #d32f2f; }
-        
-        /* Utility Class to hide filtered items */
+
+        /* Media Section */
+        .logo-feature { background: #ffffff; padding: 4rem 1rem; text-align: center; border-top: 1px solid #eee; }
+        .logo-feature img { max-width: 250px; height: auto; }
+
         .hidden { display: none !important; }
 
-        /* Spinning Logo Section */
-        .spinning-logo-section {
-            background-color: #ffffff; 
-            padding: 4rem 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .spinning-logo-section img {
-            max-width: 250px; 
-            width: 100%;
-            height: auto;
-        }
-
         /* Footer */
-        footer { background: #8b0000; color: #ffcccc; text-align: center; padding: 2rem 0; margin-top: 0; } 
+        footer { background: #8b0000; color: #ffcccc; text-align: center; padding: 2rem 0; }
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             header nav { gap: 15px; }
-            .featured-product { flex-direction: column; text-align: center; padding: 3rem 1rem; }
+            .dropdown-content { position: static; box-shadow: none; background-color: #222; width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <video class="full-width-media" autoplay loop muted playsinline>
-        <source src="DIVIDEO.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <img src="Divillian-tagline.png" alt="Divillian Tagline" class="full-width-media">
+    <div id="home">
+        <video class="full-width-media" autoplay loop muted playsinline>
+            <source src="DIVIDEO.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <img src="Divillian-tagline.png" alt="Divil’Lian Tagline" class="full-width-media">
+    </div>
 
     <header>
         <nav>
-            <a href="#collections">Collections</a>
-            <a href="#apparel-shop">Apparel</a>
-            <a href="#food">Food</a>
-            <a href="#hot-sauces">Hot Sauces</a>
+            <a href="#home">Home</a>
+            
+            <div class="dropdown">
+                <a href="#apparel-shop">Shop ▾</a>
+                <div class="dropdown-content">
+                    <a href="#apparel-shop" onclick="filterShop('tshirt')">T-Shirts</a>
+                    <a href="#apparel-shop" onclick="filterShop('hoodie')">Hoodies</a>
+                    <a href="#apparel-shop">Coffee Mugs</a>
+                    <a href="#apparel-shop" onclick="filterShop('socks')">Socks</a>
+                    <a href="#apparel-shop">Caps</a>
+                </div>
+            </div>
+
+            <a href="#media">Media</a>
+            <a href="#about">About</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <section class="featured-product" id="hot-sauces">
         <div class="featured-image">
-            <img src="HouseSauce.png" alt="Divillian House Hot Sauce">
+            <img src="HouseSauce.png" alt="Divil’Lian House Hot Sauce">
         </div>
         <div class="featured-text">
             <h2>Featured Product</h2>
-            <h3>Divillian House Sauce</h3>
-            <p>Our signature face-melting blend crafted right here in New Jersey. Made with locally sourced peppers and a secret mix of spices, it starts with a tangy kick and ends with an absolute fire that will leave you wanting more. Perfect for wings, tacos, or anything that needs a serious flavor upgrade.</p>
+            <h3>Divil’Lian House Sauce</h3>
+            <p>Our signature face-melting blend crafted right here in New Jersey. Spicy, tangy, and absolutely essential for every kitchen.</p>
             <button class="featured-btn">Buy Now - $12.00</button>
         </div>
     </section>
 
-    <div class="container" id="collections">
-        <h2 class="section-title">Our Collections</h2>
-        <div class="collections">
-            <div class="collection-card">
-                <h3>Fresh Apparel</h3>
-                <p>Represent with our comfortable, high-quality street and casual wear designed for everyday life.</p>
-            </div>
-            <div class="collection-card">
-                <h3>Gourmet Food</h3>
-                <p>Curated snacks and pantry staples inspired by East Coast flavors to elevate your daily meals.</p>
-            </div>
-            <div class="collection-card">
-                <h3>Signature Hot Sauces</h3>
-                <p>From a mild tang to absolute fire. Spice up your life with our custom small-batch blends.</p>
-            </div>
-        </div>
-    </div>
-
     <div class="container" id="apparel-shop">
-        <h2 class="section-title">Divillian Apparel</h2>
+        <h2 class="section-title">Shop Divil’Lian</h2>
         
         <div class="shop-controls">
-            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn active" data-filter="all">All Items</button>
             <button class="filter-btn" data-filter="tshirt">T-Shirts</button>
             <button class="filter-btn" data-filter="hoodie">Hoodies</button>
             <button class="filter-btn" data-filter="socks">Socks</button>
-            <button class="filter-btn" data-filter="caps">Caps</button>
-            <button class="filter-btn" data-filter="other">Other</button>
         </div>
 
         <div class="shop-grid">
-            
             <div class="shop-item tshirt">
                 <img src="BlackTshirt.png" alt="Black T-Shirt">
                 <h4>Classic Black Tee</h4>
                 <p class="price">$25.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
-                </select>
+                <select><option>Select Size</option><option>S</option><option>M</option><option>L</option></select>
                 <button class="buy-btn">Buy Now</button>
             </div>
-
             <div class="shop-item tshirt">
                 <img src="WhiteTshirt.png" alt="White T-Shirt">
-                <h4 >Classic White Tee</h4>
+                <h4>Classic White Tee</h4>
                 <p class="price">$25.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
-                </select>
+                <select><option>Select Size</option><option>S</option><option>M</option><option>L</option></select>
                 <button class="buy-btn">Buy Now</button>
             </div>
-
             <div class="shop-item hoodie">
                 <img src="GreenHoodie.png" alt="Green Hoodie">
-                <h4>Divillian Green Hoodie</h4>
+                <h4>Green Hoodie</h4>
                 <p class="price">$55.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
-                </select>
+                <select><option>Select Size</option><option>S</option><option>M</option><option>L</option></select>
                 <button class="buy-btn">Buy Now</button>
             </div>
-
-            <div class="shop-item hoodie">
-                <img src="GreyHoodie.png" alt="Grey Hoodie">
-                <h4>Divillian Grey Hoodie</h4>
-                <p class="price">$55.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
-                </select>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
-            <div class="shop-item tshirt">
-                <img src="PinkTshirt.png" alt="Pink T-Shirt">
-                <h4>Vibrant Pink Tee</h4>
-                <p class="price">$25.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
-                </select>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
-             <div class="shop-item tshirt">
-                <img src="MaroonTshirt.png" alt="Maroon T-Shirt">
-                <h4>Deep Maroon Tee</h4>
-                <p class="price">$25.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
-                </select>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
-            <div class="shop-item tshirt">
-                <img src="GreenTshirt.png" alt="Green T-Shirt">
-                <h4>Forest Green Tee</h4>
-                <p class="price">$25.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
-                </select>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
             <div class="shop-item socks">
                 <img src="Blacksocks.png" alt="Black Socks">
-                <h4>Divillian Black Socks</h4>
+                <h4>Divil’Lian Socks</h4>
                 <p class="price">$15.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="OS">One Size</option>
-                </select>
+                <select><option>One Size</option></select>
                 <button class="buy-btn">Buy Now</button>
             </div>
-
-            <div class="shop-item socks">
-                <img src="Redsocks.png" alt="Red Socks">
-                <h4>Divillian Red Socks</h4>
-                <p class="price">$15.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="OS">One Size</option>
-                </select>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
-            <div class="shop-item socks">
-                <img src="Whitesocks.png" alt="White Socks">
-                <h4>Divillian White Socks</h4>
-                <p class="price">$15.00</p>
-                <select>
-                    <option value="">Select Size</option>
-                    <option value="OS">One Size</option>
-                </select>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-
         </div>
     </div>
 
-    <section class="spinning-logo-section">
-        <img src="spinninglogo.gif" alt="Divillian Spinning Logo">
+    <div id="about" class="container" style="text-align: center;">
+        <h2 class="section-title">About Divil’Lian</h2>
+        <p>Based in New Jersey, USA. We specialize in apparel, gourmet food, and the hottest sauces on the East Coast.</p>
+    </div>
+
+    <section id="media" class="logo-feature">
+        <h2 class="section-title" style="margin-bottom: 1rem;">Media</h2>
+        <img src="Divillian-spinning-logo.gif" alt="Divil’Lian Spinning Logo">
     </section>
 
     <footer>
-        <p>&copy; 2026 Divillian. Proudly based in New Jersey, USA.</p>
+        <p id="contact">&copy; 2026 Divil’Lian. New Jersey, USA.</p>
     </footer>
 
     <script>
+        function filterShop(category) {
+            const items = document.querySelectorAll('.shop-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => {
+                if(btn.getAttribute('data-filter') === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const buttons = document.querySelectorAll('.filter-btn');
-            const items = document.querySelectorAll('.shop-item');
-
             buttons.forEach(button => {
                 button.addEventListener('click', () => {
-                    buttons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-
-                    const category = button.getAttribute('data-filter');
-
-                    items.forEach(item => {
-                        if (category === 'all' || item.classList.contains(category)) {
-                            item.classList.remove('hidden');
-                        } else {
-                            item.classList.add('hidden');
-                        }
-                    });
+                    filterShop(button.getAttribute('data-filter'));
                 });
             });
         });
