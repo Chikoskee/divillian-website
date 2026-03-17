@@ -19,14 +19,40 @@
         /* Header & Navigation */
         header { background: #000000; color: #fff; padding: 1rem 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
         header nav { display: flex; justify-content: center; gap: 25px; align-items: center; flex-wrap: wrap; }
-        header a { color: #ffcccc; text-decoration: none; font-weight: 600; transition: color 0.3s ease; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; }
+        header a { color: #ffcccc; text-decoration: none; font-weight: 600; transition: color 0.3s ease; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; padding: 10px 0; }
         header a:hover { color: #fff; }
 
-        /* Dropdown Logic */
+        /* FIXED Dropdown Logic */
         .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; background-color: #111; min-width: 180px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1; text-align: left; margin-top: 10px; }
-        .dropdown-content a { color: #ffcccc; padding: 12px 16px; text-decoration: none; display: block; font-size: 0.8rem; border-bottom: 1px solid #222; text-transform: capitalize; }
+        
+        /* This creates an invisible bridge so the menu doesn't disappear when moving the mouse down */
+        .dropdown-content { 
+            display: none; 
+            position: absolute; 
+            background-color: #111; 
+            min-width: 180px; 
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.5); 
+            z-index: 1001; 
+            text-align: left; 
+            top: 100%; /* Positions it exactly at the bottom of the header */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dropdown-content a { 
+            color: #ffcccc; 
+            padding: 12px 16px; 
+            text-decoration: none; 
+            display: block; 
+            font-size: 0.85rem; 
+            border-bottom: 1px solid #222; 
+            text-transform: capitalize; 
+            width: 100%;
+        }
+
         .dropdown-content a:hover { background-color: #8b0000; color: #fff; }
+        
+        /* The hover trigger */
         .dropdown:hover .dropdown-content { display: block; }
 
         /* Content Sections */
@@ -38,7 +64,7 @@
         .container { padding: 4rem 1rem; max-width: 1200px; margin: auto; }
         .section-title { text-align: center; margin-bottom: 3rem; font-size: 2.2rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Shop Grid (Buttons Removed) */
+        /* Shop Grid */
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
         .shop-item { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
         .shop-item img { max-width: 100%; border-radius: 8px; margin-bottom: 15px; background: #f9f9f9; }
@@ -163,7 +189,6 @@
         function filterShop(category) {
             const items = document.querySelectorAll('.shop-item');
             
-            // Show or hide based on class
             items.forEach(item => {
                 if (category === 'all' || item.classList.contains(category)) {
                     item.classList.remove('hidden');
@@ -172,8 +197,10 @@
                 }
             });
 
-            // Smooth scroll to the shop section
-            document.getElementById('apparel-shop').scrollIntoView({ behavior: 'smooth' });
+            // If a specific category is chosen, scroll to the shop
+            if (category !== 'all') {
+                document.getElementById('apparel-shop').scrollIntoView({ behavior: 'smooth' });
+            }
         }
     </script>
 </body>
