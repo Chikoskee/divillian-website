@@ -52,9 +52,14 @@
         /* Sections */
         .about-text { max-width: 800px; margin: 0 auto; text-align: center; padding-bottom: 2rem; }
         .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #444; line-height: 1.8; }
+        
+        /* Media Section - UPDATED TO 3-COLUMN GRID */
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
         .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
-        .media-video { width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        
+        /* Adjusted width for three videos */
+        .media-video { width: 100%; max-width: 380px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        
         .spinning-logo-container { margin-top: 20px; }
         .spinning-logo-container img { max-width: 250px; height: auto; }
 
@@ -89,7 +94,7 @@
     </header>
 
     <div class="container" id="apparel-shop">
-        <h2 class="section-title">Full Collection</h2>
+        <h2 class="section-title">Collections</h2>
         <div class="shop-grid">
             
             <div class="shop-item skimask">
@@ -132,32 +137,32 @@
 
             <div class="shop-item hoodie">
                 <img src="GreenHoodie.png" alt="Green Hoodie">
-                <h4>Divil’Lian Green Hoodie</h4>
+                <h4>Green Hoodie</h4>
                 <p class="price">$55.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
             <div class="shop-item hoodie">
                 <img src="GreyHoodie.png" alt="Grey Hoodie">
-                <h4>Divil’Lian Grey Hoodie</h4>
+                <h4>Grey Hoodie</h4>
                 <p class="price">$55.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
 
             <div class="shop-item socks">
                 <img src="Blacksocks.png" alt="Black Socks">
-                <h4>Divil’Lian Black Socks</h4>
+                <h4>Black Socks</h4>
                 <p class="price">$15.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
             <div class="shop-item socks">
                 <img src="Redsocks.png" alt="Red Socks">
-                <h4>Divil’Lian Red Socks</h4>
+                <h4>Red Socks</h4>
                 <p class="price">$15.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
             <div class="shop-item socks">
                 <img src="Whitesocks.png" alt="White Socks">
-                <h4>Divil’Lian White Socks</h4>
+                <h4>White Socks</h4>
                 <p class="price">$15.00</p>
                 <button class="buy-btn">Buy Now</button>
             </div>
@@ -168,8 +173,8 @@
     <div id="about" class="container">
         <h2 class="section-title">About Divil’Lian</h2>
         <div class="about-text">
-            <p>Born in the heart of New Jersey, Divil’Lian is more than just a brand; it’s a tribute to the bold and the authentic. We started with a simple mission to merge high-quality streetwear with the unique, gritty flavors of the East Coast.</p>
-            <p>We invite you to explore our collections and join a community that values quality, local craftsmanship, and a touch of fire in everything we do.</p>
+            <p>Proudly based in New Jersey, USA. We specialize in apparel, gourmet food, and small-batch hot sauces.</p>
+            <p>We invite you to join a community that values quality, local craftsmanship, and a touch of fire in everything we do.</p>
         </div>
     </div>
 
@@ -182,6 +187,9 @@
             <video class="media-video" controls playsinline>
                 <source src="Samplevideo2.mp4" type="video/mp4">
             </video>
+            <video class="media-video" controls playsinline>
+                <source src="SampleVideo3.mp4" type="video/mp4">
+            </video>
         </div>
         <div class="spinning-logo-container">
             <img src="spinninglogo.gif" alt="Divil’Lian Spinning Logo">
@@ -189,7 +197,7 @@
     </section>
 
     <footer>
-        <p id="contact">&copy; 2026 Divil’Lian. New Jersey, USA.</p>
+        <p>&copy; 2026 Divil’Lian. New Jersey, USA.</p>
     </footer>
 
     <script>
@@ -202,10 +210,7 @@
                     item.classList.add('hidden');
                 }
             });
-            // Auto-scroll to shop when a category is chosen
-            if (category !== 'all') {
-                document.getElementById('apparel-shop').scrollIntoView({ behavior: 'smooth' });
-            }
+            document.getElementById('apparel-shop').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
