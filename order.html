@@ -9,74 +9,91 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         body { background-color: #fff5f5; color: #333; line-height: 1.6; padding: 20px; }
         .order-container { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-top: 5px solid #8b0000; }
-        h1 { color: #8b0000; margin-bottom: 20px; text-align: center; text-transform: uppercase; }
-        p { margin-bottom: 20px; font-size: 0.9rem; text-align: center; color: #666; }
+        h1 { color: #8b0000; margin-bottom: 10px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        .subtitle { margin-bottom: 25px; font-size: 0.9rem; text-align: center; color: #666; }
         .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; color: #111; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; outline: none; transition: border 0.3s; }
+        input:focus, select:focus, textarea:focus { border-color: #8b0000; }
         .submit-btn { background: #000; color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; }
         .submit-btn:hover { background: #8b0000; }
-        .back-link { display: block; text-align: center; margin-top: 20px; color: #8b0000; text-decoration: none; font-weight: 600; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #8b0000; text-decoration: none; font-weight: 600; font-size: 0.85rem; }
+        .back-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
     <div class="order-container">
         <h1>Order Request</h1>
-        <p>Fill out this form and we will contact you via email to confirm your order and provide payment instructions.</p>
+        <p class="subtitle">Complete the details below. Our admin will email you to confirm availability and provide payment instructions.</p>
         
-        <form action="https://formspree.io/f/YOUR_EMAIL_ID_HERE" method="POST">
+        <form action="https://formspree.io/f/mnjlvlnl" method="POST">
+            
+            <input type="hidden" name="_subject" value="New Divil'Lian Order Request!">
+
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" name="name" required placeholder="John Doe">
+                <input type="text" name="name" required placeholder="Enter your full name">
             </div>
             
             <div class="form-group">
                 <label>Email Address</label>
-                <input type="email" name="_replyto" required placeholder="name@email.com">
+                <input type="email" name="email" required placeholder="yourname@email.com">
             </div>
 
             <div class="form-group">
                 <label>Phone Number</label>
-                <input type="tel" name="phone" placeholder="(123) 456-7890">
+                <input type="tel" name="phone" placeholder="(Optional) For faster contact">
             </div>
 
             <div class="form-group">
-                <label>Select Product(s)</label>
-                <select name="product" required>
-                    <option value="">-- Choose an Item --</option>
-                    <option value="Ski Mask">Signature Ski Mask - $30.00</option>
-                    <option value="Black Face Mask">Black Face Mask - $15.00</option>
-                    <option value="White Face Mask">White Face Mask - $15.00</option>
-                    <option value="Black Bucket Hat">Black Bucket Hat - $28.00</option>
-                    <option value="White Bucket Hat">White Bucket Hat - $28.00</option>
-                    <option value="Classic Black Tee">Classic Black Tee - $25.00</option>
-                    <option value="Green Hoodie">Green Hoodie - $55.00</option>
-                    <option value="Black Socks">Black Socks - $15.00</option>
-                    <option value="Other">Other / Multiple Items (Explain below)</option>
+                <label>Item to Order</label>
+                <select name="product_requested" required>
+                    <option value="" disabled selected>Select an item...</option>
+                    <optgroup label="Headwear">
+                        <option value="Signature Ski Mask">Signature Ski Mask - $30.00</option>
+                        <option value="Black Face Mask">Black Face Mask - $15.00</option>
+                        <option value="White Face Mask">White Face Mask - $15.00</option>
+                        <option value="Black Bucket Hat">Black Bucket Hat - $28.00</option>
+                        <option value="White Bucket Hat">White Bucket Hat - $28.00</option>
+                    </optgroup>
+                    <optgroup label="Apparel">
+                        <option value="Black T-Shirt">Classic Black Tee - $25.00</option>
+                        <option value="Green T-Shirt">Forest Green Tee - $25.00</option>
+                        <option value="Maroon T-Shirt">Deep Maroon Tee - $25.00</option>
+                        <option value="Green Hoodie">Green Hoodie - $55.00</option>
+                        <option value="Grey Hoodie">Grey Hoodie - $55.00</option>
+                    </optgroup>
+                    <optgroup label="Accessories">
+                        <option value="Black Socks">Black Socks - $15.00</option>
+                        <option value="Red Socks">Red Socks - $15.00</option>
+                        <option value="White Socks">White Socks - $15.00</option>
+                    </optgroup>
+                    <option value="Multiple Items">Multiple Items (List them in instructions)</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Size (if applicable)</label>
+                <label>Size</label>
                 <select name="size">
-                    <option value="N/A">N/A</option>
+                    <option value="N/A">N/A (Masks/Socks/Hats)</option>
                     <option value="Small">Small</option>
                     <option value="Medium">Medium</option>
                     <option value="Large">Large</option>
                     <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Shipping Address / Special Instructions</label>
-                <textarea name="message" rows="4" placeholder="Enter your full address and any other items you want to add..."></textarea>
+                <label>Shipping Address & Additional Notes</label>
+                <textarea name="shipping_info" rows="4" required placeholder="Full shipping address and any special requests..."></textarea>
             </div>
 
-            <button type="submit" class="submit-btn">Send Order Request</button>
+            <button type="submit" class="submit-btn">Submit Order Request</button>
         </form>
 
-        <a href="index.html" class="back-link">← Back to Shop</a>
+        <a href="index.html" class="back-link">← Return to Shop</a>
     </div>
 
 </body>
