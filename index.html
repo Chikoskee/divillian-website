@@ -88,16 +88,42 @@
 
         /* Hot Sauces Section Layout */
         .sauces-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; }
-        .sauces-main-img img { width: 100%; height: auto; max-height: 450px; object-fit: contain; background: #fafafa; border-radius: 10px; padding: 10px; }
+        .sauces-main-img img { width: 100%; height: auto; max-height: 450px; object-fit: contain; background: #fafafa; border-radius: 10px; padding: 10px; cursor: pointer; transition: transform 0.3s ease; }
+        .sauces-main-img img:hover { transform: scale(1.02); }
+        
         .sauce-explorer { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
-        .explorer-display img { width: 100%; max-width: 250px; height: 280px; object-fit: contain; margin-bottom: 15px; transition: opacity 0.3s ease; }
+        
+        /* Clickable Viewport setup */
+        .explorer-display .img-wrapper { position: relative; cursor: pointer; display: inline-block; }
+        .explorer-display img { width: 100%; max-width: 400px; height: auto; object-fit: contain; margin-bottom: 15px; transition: opacity 0.3s ease, transform 0.3s ease; border-radius: 8px; }
+        .explorer-display .img-wrapper:hover img { transform: scale(1.02); }
+        
+        /* Subtle Hint Overlay */
+        .explorer-display .img-wrapper::after {
+            content: '🔍 Click to expand'; position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.7); color: white; padding: 6px 12px; font-size: 0.75rem; border-radius: 20px;
+            opacity: 0; transition: opacity 0.3s ease; pointer-events: none; font-weight: 600;
+        }
+        .explorer-display .img-wrapper:hover::after { opacity: 1; }
+
         .flavor-title { font-weight: 700; font-size: 1.4rem; color: #8b0000; margin-bottom: 5px; text-transform: uppercase; }
-        .flavor-desc { font-size: 0.95rem; color: #555; margin-bottom: 20px; max-width: 350px; min-height: 50px; }
+        .flavor-desc { font-size: 0.95rem; color: #555; margin-bottom: 20px; max-width: 450px; min-height: 50px; }
         
         /* Interactive Nav Controls */
         .sauce-nav { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
         .sauce-nav-btn { background: #f0f0f0; border: 2px solid #ddd; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
         .sauce-nav-btn.active, .sauce-nav-btn:hover { background: #8b0000; color: white; border-color: #8b0000; }
+
+        /* Lightbox Modal CSS Overlay Component */
+        .lightbox-modal {
+            display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .lightbox-modal.open { display: flex; opacity: 1; }
+        .lightbox-content { max-width: 90%; max-height: 85vh; object-fit: contain; border-radius: 6px; transform: scale(0.9); transition: transform 0.3s ease; box-shadow: 0 5px 25px rgba(0,0,0,0.5); }
+        .lightbox-modal.open .lightbox-content { transform: scale(1); }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; user-select: none; transition: 0.2s; }
+        .lightbox-close:hover { color: #ffcccc; }
 
         /* Media Section */
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
@@ -194,7 +220,7 @@
         <h2 class="section-title">Gourmet Hot Sauces</h2>
         <div class="sauces-showcase">
             <div class="sauces-main-img">
-                <img src="sauce-all.jpeg" alt="Divil'Lian Hot Sauce Lineup">
+                <img src="sauce-all.jpeg" alt="Divil'Lian Hot Sauce Lineup" onclick="openLightbox(this.src)">
             </div>
             
             <div class="sauce-explorer">
@@ -206,13 +232,20 @@
                 </div>
                 
                 <div class="explorer-display">
-                    <img id="sauce-viewport" src="sauce-subtlekick.jpeg" alt="Subtle Kick Flavor">
+                    <div class="img-wrapper" onclick="openLightbox(document.getElementById('sauce-viewport').src)">
+                        <img id="sauce-viewport" src="sauce-subtlekick.jpeg" alt="Subtle Kick Flavor">
+                    </div>
                     <h4 id="sauce-title" class="flavor-title">Subtle Kick</h4>
                     <p id="sauce-desc" class="flavor-desc">A perfect introductory layer of mild heat paired with savory, smooth background notes.</p>
                     <a href="order.html" class="buy-btn" style="max-width: 200px; margin: 0 auto;">Order Flavor</a>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="lightbox-container" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Expanded View Component">
     </div>
 
     <section id="media" class="media-section">
@@ -285,11 +318,9 @@
         };
 
         function switchSauce(sauceKey, buttonElement) {
-            // Update active states on the button UI elements
             document.querySelectorAll('.sauce-nav-btn').forEach(btn => btn.classList.remove('active'));
             buttonElement.classList.add('active');
 
-            // Swap details gracefully inside the layout target blocks
             const targetData = sauceData[sauceKey];
             const imgElement = document.getElementById('sauce-viewport');
             
@@ -301,6 +332,30 @@
                 document.getElementById('sauce-desc').innerText = targetData.desc;
                 imgElement.style.opacity = 1;
             }, 200);
+        }
+
+        /* Lightbox Control Logic Functions */
+        function openLightbox(imageSource) {
+            const modal = document.getElementById('lightbox-container');
+            const targetDisplayImg = document.getElementById('lightbox-img');
+            
+            targetDisplayImg.src = imageSource;
+            modal.style.display = 'flex';
+            
+            // Allow layout engine paint pass before appending CSS animations
+            setTimeout(() => {
+                modal.classList.add('open');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-container');
+            modal.classList.remove('open');
+            
+            // Delay actual DOM node extraction until transition fadeout sequence finishes
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
         }
 
         function toggleMute() {
