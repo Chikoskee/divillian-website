@@ -27,7 +27,7 @@
         }
         .mute-btn:hover { background: #8b0000; }
 
-        /* Banner Styles - Now First */
+        /* Banner Styles */
         .middle-banner {
             width: 100%;
             background-color: #ff0000; 
@@ -39,7 +39,7 @@
             display: block;
         }
 
-        /* Header & Navigation - Now Under Banner */
+        /* Header & Navigation */
         header { background: #000000; color: #fff; padding: 1rem 0; text-align: center; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #8b0000; }
         header nav { display: flex; justify-content: center; gap: 25px; align-items: center; flex-wrap: wrap; }
         header a { color: #ffcccc; text-decoration: none; font-weight: 600; transition: color 0.3s ease; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; padding: 10px 0; }
@@ -86,6 +86,19 @@
         .about-text { max-width: 850px; margin: 0 auto; text-align: center; padding-bottom: 2rem; }
         .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #444; line-height: 1.8; }
 
+        /* Hot Sauces Section Layout */
+        .sauces-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; }
+        .sauces-main-img img { width: 100%; height: auto; max-height: 450px; object-fit: contain; background: #fafafa; border-radius: 10px; padding: 10px; }
+        .sauce-explorer { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+        .explorer-display img { width: 100%; max-width: 250px; height: 280px; object-fit: contain; margin-bottom: 15px; transition: opacity 0.3s ease; }
+        .flavor-title { font-weight: 700; font-size: 1.4rem; color: #8b0000; margin-bottom: 5px; text-transform: uppercase; }
+        .flavor-desc { font-size: 0.95rem; color: #555; margin-bottom: 20px; max-width: 350px; min-height: 50px; }
+        
+        /* Interactive Nav Controls */
+        .sauce-nav { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+        .sauce-nav-btn { background: #f0f0f0; border: 2px solid #ddd; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
+        .sauce-nav-btn.active, .sauce-nav-btn:hover { background: #8b0000; color: white; border-color: #8b0000; }
+
         /* Media Section */
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
         .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
@@ -105,6 +118,11 @@
         .newsletter-btn:hover { background: #fff; color: #8b0000; }
 
         .footer-bottom { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.8rem; color: #ffcccc; }
+
+        /* Responsive Settings */
+        @media (max-width: 768px) {
+            .sauces-showcase { grid-template-columns: 1fr; gap: 30px; padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -118,12 +136,10 @@
         </video>
     </div>
 
-    <!-- Banner Section - Now First -->
     <div class="middle-banner">
         <img src="Banner.png" alt="Divil’Lian Banner">
     </div>
 
-    <!-- Header Section - Now Second (Sticky) -->
     <header>
         <nav>
             <a href="#home">Home</a>
@@ -174,6 +190,31 @@
         </div>
     </div>
 
+    <div id="sauces" class="container" style="padding-top: 0; padding-bottom: 4rem;">
+        <h2 class="section-title">Gourmet Hot Sauces</h2>
+        <div class="sauces-showcase">
+            <div class="sauces-main-img">
+                <img src="sauce-all.jpeg" alt="Divil'Lian Hot Sauce Lineup">
+            </div>
+            
+            <div class="sauce-explorer">
+                <div class="sauce-nav">
+                    <button class="sauce-nav-btn active" onclick="switchSauce('subtlekick', this)">Subtle Kick</button>
+                    <button class="sauce-nav-btn" onclick="switchSauce('spicytalk', this)">Spicy Talk</button>
+                    <button class="sauce-nav-btn" onclick="switchSauce('offthegrill', this)">Off The Grill</button>
+                    <button class="sauce-nav-btn" onclick="switchSauce('fullflavor', this)">Full Flavor</button>
+                </div>
+                
+                <div class="explorer-display">
+                    <img id="sauce-viewport" src="sauce-subtlekick.jpeg" alt="Subtle Kick Flavor">
+                    <h4 id="sauce-title" class="flavor-title">Subtle Kick</h4>
+                    <p id="sauce-desc" class="flavor-desc">A perfect introductory layer of mild heat paired with savory, smooth background notes.</p>
+                    <a href="order.html" class="buy-btn" style="max-width: 200px; margin: 0 auto;">Order Flavor</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section id="media" class="media-section">
         <h2 class="section-title">Media</h2>
         <div class="video-grid">
@@ -219,6 +260,49 @@
     </footer>
 
     <script>
+        // Data configurations for swapping sauce items
+        const sauceData = {
+            'subtlekick': {
+                img: 'sauce-subtlekick.jpeg',
+                title: 'Subtle Kick',
+                desc: 'A perfect introductory layer of mild heat paired with savory, smooth background notes.'
+            },
+            'spicytalk': {
+                img: 'sauce-spicytalk.jpeg',
+                title: 'Spicy Talk',
+                desc: 'Bold heat that prompts a real conversation. Vibrant peppers balanced with crisp flavor profile layers.'
+            },
+            'offthegrill': {
+                img: 'sauce-offthegrill.jpeg',
+                title: 'Off The Grill',
+                desc: 'Smoky, deep, barbecue-inspired rich fire profile. Excellent for heavy meats and marinades.'
+            },
+            'fullflavor': {
+                img: 'sauce-fullflavor.jpeg',
+                title: 'Full Flavor',
+                desc: 'An intense blast of maximum aromatic components alongside an elegant, escalating burn.'
+            }
+        };
+
+        function switchSauce(sauceKey, buttonElement) {
+            // Update active states on the button UI elements
+            document.querySelectorAll('.sauce-nav-btn').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+
+            // Swap details gracefully inside the layout target blocks
+            const targetData = sauceData[sauceKey];
+            const imgElement = document.getElementById('sauce-viewport');
+            
+            imgElement.style.opacity = 0;
+            setTimeout(() => {
+                imgElement.src = targetData.img;
+                imgElement.alt = targetData.title + ' Flavor';
+                document.getElementById('sauce-title').innerText = targetData.title;
+                document.getElementById('sauce-desc').innerText = targetData.desc;
+                imgElement.style.opacity = 1;
+            }, 200);
+        }
+
         function toggleMute() {
             const video = document.getElementById('hero-video');
             const icon = document.getElementById('mute-icon');
