@@ -114,6 +114,11 @@
         .sauce-nav-btn { background: #f0f0f0; border: 2px solid #ddd; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
         .sauce-nav-btn.active, .sauce-nav-btn:hover { background: #8b0000; color: white; border-color: #8b0000; }
 
+        /* Style/Packaging Toggle Option Controls */
+        .variant-toggle { display: flex; gap: 5px; background: #eee; padding: 4px; border-radius: 25px; margin-bottom: 20px; }
+        .variant-btn { background: transparent; border: none; padding: 6px 14px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; border-radius: 20px; cursor: pointer; transition: 0.2s; color: #666; }
+        .variant-btn.active { background: #000; color: #fff; }
+
         /* Lightbox Modal CSS Overlay Component */
         .lightbox-modal {
             display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
@@ -235,6 +240,12 @@
                     <div class="img-wrapper" onclick="openLightbox(document.getElementById('sauce-viewport').src)">
                         <img id="sauce-viewport" src="sauce-subtlekick.jpeg" alt="Subtle Kick Flavor">
                     </div>
+
+                    <div class="variant-toggle">
+                        <button id="btn-glass" class="variant-btn active" onclick="setPackagingType('glass')">Glass Bottle</button>
+                        <button id="btn-squeeze" class="variant-btn" onclick="setPackagingType('squeeze')">Squeeze Bottle</button>
+                    </div>
+
                     <h4 id="sauce-title" class="flavor-title">Subtle Kick</h4>
                     <p id="sauce-desc" class="flavor-desc">A perfect introductory layer of mild heat paired with savory, smooth background notes.</p>
                     <a href="order.html" class="buy-btn" style="max-width: 200px; margin: 0 auto;">Order Flavor</a>
@@ -293,45 +304,74 @@
     </footer>
 
     <script>
-        // Data configurations for swapping sauce items
+        // Track the current functional state configurations
+        let currentSauceKey = 'subtlekick';
+        let currentPackagingType = 'glass'; // 'glass' or 'squeeze'
+
+        // Data configurations with updated double asset variants
         const sauceData = {
             'subtlekick': {
-                img: 'sauce-subtlekick.jpeg',
+                glassImg: 'sauce-subtlekick.jpeg',
+                squeezeImg: 'Sauce-subtlekick2.jpeg',
                 title: 'Subtle Kick',
                 desc: 'A perfect introductory layer of mild heat paired with savory, smooth background notes.'
             },
             'spicytalk': {
-                img: 'sauce-spicytalk.jpeg',
+                glassImg: 'sauce-spicytalk.jpeg',
+                squeezeImg: 'Sauce-spicytalk2.jpeg',
                 title: 'Spicy Talk',
                 desc: 'Bold heat that prompts a real conversation. Vibrant peppers balanced with crisp flavor profile layers.'
             },
             'offthegrill': {
-                img: 'sauce-offthegrill.jpeg',
+                glassImg: 'sauce-offthegrill.jpeg',
+                squeezeImg: 'Sauce-offthegrill2.jpeg',
                 title: 'Off The Grill',
                 desc: 'Smoky, deep, barbecue-inspired rich fire profile. Excellent for heavy meats and marinades.'
             },
             'fullflavor': {
-                img: 'sauce-fullflavor.jpeg',
+                glassImg: 'sauce-fullflavor.jpeg',
+                squeezeImg: 'Sauce-fullflavor2.jpeg',
                 title: 'Full Flavor',
                 desc: 'An intense blast of maximum aromatic components alongside an elegant, escalating burn.'
             }
         };
 
-        function switchSauce(sauceKey, buttonElement) {
-            document.querySelectorAll('.sauce-nav-btn').forEach(btn => btn.classList.remove('active'));
-            buttonElement.classList.add('active');
-
-            const targetData = sauceData[sauceKey];
+        function updateExplorerDisplay() {
+            const targetData = sauceData[currentSauceKey];
             const imgElement = document.getElementById('sauce-viewport');
+            const targetImgSrc = currentPackagingType === 'glass' ? targetData.glassImg : targetData.squeezeImg;
             
             imgElement.style.opacity = 0;
             setTimeout(() => {
-                imgElement.src = targetData.img;
-                imgElement.alt = targetData.title + ' Flavor';
+                imgElement.src = targetImgSrc;
+                imgElement.alt = `${targetData.title} (${currentPackagingType} bottle) Flavor`;
                 document.getElementById('sauce-title').innerText = targetData.title;
                 document.getElementById('sauce-desc').innerText = targetData.desc;
                 imgElement.style.opacity = 1;
             }, 200);
+        }
+
+        function switchSauce(sauceKey, buttonElement) {
+            document.querySelectorAll('.sauce-nav-btn').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+
+            currentSauceKey = sauceKey;
+            updateExplorerDisplay();
+        }
+
+        function setPackagingType(type) {
+            currentPackagingType = type;
+            
+            document.getElementById('btn-glass').classList.remove('active');
+            document.getElementById('btn-squeeze').classList.remove('active');
+            
+            if (type === 'glass') {
+                document.getElementById('btn-glass').classList.add('active');
+            } else {
+                document.getElementById('btn-squeeze').classList.add('active');
+            }
+            
+            updateExplorerDisplay();
         }
 
         /* Lightbox Control Logic Functions */
