@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divil’Lian | Gourmet Hot Sauces</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Settings */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { line-height: 1.6; color: #333; background-color: #fff5f5; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* Header & Navigation */
+        header { background: #000000; color: #fff; padding: 1rem 0; text-align: center; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #8b0000; }
+        header nav { display: flex; justify-content: center; gap: 25px; align-items: center; flex-wrap: wrap; }
+        header a { color: #ffcccc; text-decoration: none; font-weight: 600; transition: color 0.3s ease; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; padding: 10px 0; }
+        header a:hover { color: #fff; }
+
+        /* Dropdown Logic */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content {
+            display: none; position: absolute; background-color: #111; min-width: 180px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.5); z-index: 1001; text-align: left;
+            top: 100%; left: 50%; transform: translateX(-50%);
+        }
+        .dropdown-content a { color: #ffcccc; padding: 12px 16px; text-decoration: none; display: block; font-size: 0.85rem; border-bottom: 1px solid #222; text-transform: capitalize; width: 100%; }
+        .dropdown-content a:hover { background-color: #8b0000; color: #fff; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* Page Container */
+        .container { padding: 4rem 1rem; max-width: 1200px; margin: auto; }
+        .section-title { text-align: center; margin-bottom: 2rem; font-size: 2.2rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Intro blurb under the title */
+        .page-intro { max-width: 850px; margin: 0 auto 2.5rem; text-align: center; }
+        .page-intro p { font-size: 1.1rem; color: #444; line-height: 1.8; }
+
+        .buy-btn {
+            display: block;
+            text-decoration: none;
+            background: #000;
+            color: white !important;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+        .buy-btn:hover { background: #8b0000; color: white !important; }
+
+        /* Hot Sauces Section Layout */
+        .sauces-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; }
+        .sauces-main-img img { width: 100%; height: auto; max-height: 450px; object-fit: contain; background: #fafafa; border-radius: 10px; padding: 10px; cursor: pointer; transition: transform 0.3s ease; }
+        .sauces-main-img img:hover { transform: scale(1.02); }
+
+        .sauce-explorer { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+
+        /* Clickable Viewport setup */
+        .explorer-display .img-wrapper { position: relative; cursor: pointer; display: inline-block; }
+        .explorer-display img { width: 100%; max-width: 400px; height: auto; object-fit: contain; margin-bottom: 15px; transition: opacity 0.3s ease, transform 0.3s ease; border-radius: 8px; }
+        .explorer-display .img-wrapper:hover img { transform: scale(1.02); }
+
+        /* Subtle Hint Overlay */
+        .explorer-display .img-wrapper::after {
+            content: '🔍 Click to expand'; position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.7); color: white; padding: 6px 12px; font-size: 0.75rem; border-radius: 20px;
+            opacity: 0; transition: opacity 0.3s ease; pointer-events: none; font-weight: 600;
+        }
+        .explorer-display .img-wrapper:hover::after { opacity: 1; }
+
+        .flavor-title { font-weight: 700; font-size: 1.4rem; color: #8b0000; margin-bottom: 5px; text-transform: uppercase; }
+        .flavor-desc { font-size: 0.95rem; color: #555; margin-bottom: 20px; max-width: 450px; min-height: 50px; }
+
+        /* Interactive Nav Controls */
+        .sauce-nav { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+        .sauce-nav-btn { background: #f0f0f0; border: 2px solid #ddd; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
+        .sauce-nav-btn.active, .sauce-nav-btn:hover { background: #8b0000; color: white; border-color: #8b0000; }
+
+        /* Style/Packaging Toggle Option Controls */
+        .variant-toggle { display: flex; gap: 5px; background: #eee; padding: 4px; border-radius: 25px; margin-bottom: 20px; }
+        .variant-btn { background: transparent; border: none; padding: 6px 14px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; border-radius: 20px; cursor: pointer; transition: 0.2s; color: #666; }
+        .variant-btn.active { background: #000; color: #fff; }
+
+        /* Gallery of all flavors */
+        .sauce-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 50px; }
+        .sauce-card { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
+        .sauce-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .sauce-card img { width: 100%; height: 280px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; background: #f9f9f9; cursor: pointer; }
+        .sauce-card h4 { font-weight: 700; margin-bottom: 5px; font-size: 1.1rem; color: #8b0000; text-transform: uppercase; }
+        .sauce-card p { font-size: 0.9rem; color: #555; margin-bottom: 15px; min-height: 60px; }
+
+        /* Lightbox Modal CSS Overlay Component */
+        .lightbox-modal {
+            display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .lightbox-modal.open { display: flex; opacity: 1; }
+        .lightbox-content { max-width: 90%; max-height: 85vh; object-fit: contain; border-radius: 6px; transform: scale(0.9); transition: transform 0.3s ease; box-shadow: 0 5px 25px rgba(0,0,0,0.5); }
+        .lightbox-modal.open .lightbox-content { transform: scale(1); }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; user-select: none; transition: 0.2s; }
+        .lightbox-close:hover { color: #ffcccc; }
+
+        /* Footer Styles */
+        footer { background: #8b0000; color: #fff; padding: 4rem 1rem 1rem; border-top: 5px solid #000; }
+        .footer-container { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+        .footer-section h4 { text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; border-bottom: 2px solid #ffcccc; display: inline-block; padding-bottom: 5px; }
+        .footer-section p, .footer-section li { font-size: 0.9rem; color: #ffcccc; margin-bottom: 10px; list-style: none; }
+        .footer-section a { color: #fff; text-decoration: none; transition: color 0.3s; }
+        .footer-section a:hover { color: #000; }
+
+        .newsletter-input { width: 100%; padding: 12px; border-radius: 5px; border: none; margin-bottom: 10px; font-family: inherit; }
+        .newsletter-btn { background: #000; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: 700; width: 100%; text-transform: uppercase; }
+        .newsletter-btn:hover { background: #fff; color: #8b0000; }
+
+        .footer-bottom { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.8rem; color: #ffcccc; }
+
+        /* Responsive Settings */
+        @media (max-width: 768px) {
+            .sauces-showcase { grid-template-columns: 1fr; gap: 30px; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html#home">Home</a>
+            <div class="dropdown">
+                <a href="index.html#apparel-shop">Shop ▾</a>
+                <div class="dropdown-content">
+                    <a href="index.html#apparel-shop">T-Shirts</a>
+                    <a href="index.html#apparel-shop">Hoodies</a>
+                    <a href="index.html#apparel-shop">Ski Masks</a>
+                    <a href="index.html#apparel-shop">Face Masks</a>
+                    <a href="index.html#apparel-shop">Bucket Hats</a>
+                    <a href="index.html#apparel-shop">Socks</a>
+                </div>
+            </div>
+            <a href="sauces.html">Sauces</a>
+            <a href="index.html#media">Media</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Gourmet Hot Sauces</h2>
+
+        <div class="page-intro">
+            <p>Four signature flavors, crafted in New Jersey. From a smooth introductory warmth to a full-flavor blast of fire — explore the lineup below, switch between glass and squeeze bottles, and click any image to take a closer look.</p>
+        </div>
+
+        <div class="sauces-showcase">
+            <div class="sauces-main-img">
+                <img src="sauce-all.jpeg" alt="Divil'Lian Hot Sauce Lineup" onclick="openLightbox(this.src)">
+            </div>
+
+            <div class="sauce-explorer">
+                <div class="sauce-nav">
+                    <button class="sauce-nav-btn active" onclick="switchSauce('subtlekick', this)">Subtle Kick</button>
+                    <button class="sauce-nav-btn" onclick="switchSauce('spicytalk', this)">Spicy Talk</button>
+                    <button class="sauce-nav-btn" onclick="switchSauce('offthegrill', this)">Off The Grill</button>
+                    <button class="sauce-nav-btn" onclick="switchSauce('fullflavor', this)">Full Flavor</button>
+                </div>
+
+                <div class="explorer-display">
+                    <div class="img-wrapper" onclick="openLightbox(document.getElementById('sauce-viewport').src)">
+                        <img id="sauce-viewport" src="sauce-subtlekick.jpeg" alt="Subtle Kick Flavor">
+                    </div>
+
+                    <div class="variant-toggle">
+                        <button id="btn-glass" class="variant-btn active" onclick="setPackagingType('glass')">Glass Bottle</button>
+                        <button id="btn-squeeze" class="variant-btn" onclick="setPackagingType('squeeze')">Squeeze Bottle</button>
+                    </div>
+
+                    <h4 id="sauce-title" class="flavor-title">Subtle Kick</h4>
+                    <p id="sauce-desc" class="flavor-desc">A perfect introductory layer of mild heat paired with savory, smooth background notes.</p>
+                    <a href="order.html" class="buy-btn" style="max-width: 200px; margin: 0 auto;">Order Flavor</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full gallery of every flavor at a glance -->
+        <div class="sauce-gallery">
+            <div class="sauce-card">
+                <img src="sauce-subtlekick.jpeg" alt="Subtle Kick" onclick="openLightbox(this.src)">
+                <h4>Subtle Kick</h4>
+                <p>A perfect introductory layer of mild heat paired with savory, smooth background notes.</p>
+                <a href="order.html" class="buy-btn">Order Now</a>
+            </div>
+            <div class="sauce-card">
+                <img src="sauce-spicytalk.jpeg" alt="Spicy Talk" onclick="openLightbox(this.src)">
+                <h4>Spicy Talk</h4>
+                <p>Bold heat that prompts a real conversation. Vibrant peppers balanced with crisp flavor profile layers.</p>
+                <a href="order.html" class="buy-btn">Order Now</a>
+            </div>
+            <div class="sauce-card">
+                <img src="sauce-offthegrill.jpeg" alt="Off The Grill" onclick="openLightbox(this.src)">
+                <h4>Off The Grill</h4>
+                <p>Smoky, deep, barbecue-inspired rich fire profile. Excellent for heavy meats and marinades.</p>
+                <a href="order.html" class="buy-btn">Order Now</a>
+            </div>
+            <div class="sauce-card">
+                <img src="sauce-fullflavor.jpeg" alt="Full Flavor" onclick="openLightbox(this.src)">
+                <h4>Full Flavor</h4>
+                <p>An intense blast of maximum aromatic components alongside an elegant, escalating burn.</p>
+                <a href="order.html" class="buy-btn">Order Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox-container" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Expanded View Component">
+    </div>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Divil’Lian</h4>
+                <p>Premium apparel and gourmet flavors crafted in New Jersey, USA. Representing the bold and the authentic since 2026.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#apparel-shop">Shop All</a></li>
+                    <li><a href="sauces.html">Sauces</a></li>
+                    <li><a href="index.html#about">Our Story</a></li>
+                    <li><a href="index.html#media">Media Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>📍 Jersey City, New Jersey, USA</p>
+                <p>📧 info@divillian.com</p>
+                <p>📸 Instagram: @DivilLian</p>
+                <p>🎥 TikTok: @DivilLianOfficial</p>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Get the latest drops and spicy news.</p>
+                <input type="email" placeholder="Enter your email" class="newsletter-input">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Divil’Lian. All rights reserved. Made with fire in New Jersey.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Track the current functional state configurations
+        let currentSauceKey = 'subtlekick';
+        let currentPackagingType = 'glass'; // 'glass' or 'squeeze'
+
+        // Data configurations with updated double asset variants
+        const sauceData = {
+            'subtlekick': {
+                glassImg: 'sauce-subtlekick.jpeg',
+                squeezeImg: 'Sauce-subtlekick2.jpeg',
+                title: 'Subtle Kick',
+                desc: 'A perfect introductory layer of mild heat paired with savory, smooth background notes.'
+            },
+            'spicytalk': {
+                glassImg: 'sauce-spicytalk.jpeg',
+                squeezeImg: 'Sauce-spicytalk2.jpeg',
+                title: 'Spicy Talk',
+                desc: 'Bold heat that prompts a real conversation. Vibrant peppers balanced with crisp flavor profile layers.'
+            },
+            'offthegrill': {
+                glassImg: 'sauce-offthegrill.jpeg',
+                squeezeImg: 'Sauce-offthegrill2.jpeg',
+                title: 'Off The Grill',
+                desc: 'Smoky, deep, barbecue-inspired rich fire profile. Excellent for heavy meats and marinades.'
+            },
+            'fullflavor': {
+                glassImg: 'sauce-fullflavor.jpeg',
+                squeezeImg: 'Sauce-fullflavor2.jpeg',
+                title: 'Full Flavor',
+                desc: 'An intense blast of maximum aromatic components alongside an elegant, escalating burn.'
+            }
+        };
+
+        function updateExplorerDisplay() {
+            const targetData = sauceData[currentSauceKey];
+            const imgElement = document.getElementById('sauce-viewport');
+            const targetImgSrc = currentPackagingType === 'glass' ? targetData.glassImg : targetData.squeezeImg;
+
+            imgElement.style.opacity = 0;
+            setTimeout(() => {
+                imgElement.src = targetImgSrc;
+                imgElement.alt = `${targetData.title} (${currentPackagingType} bottle) Flavor`;
+                document.getElementById('sauce-title').innerText = targetData.title;
+                document.getElementById('sauce-desc').innerText = targetData.desc;
+                imgElement.style.opacity = 1;
+            }, 200);
+        }
+
+        function switchSauce(sauceKey, buttonElement) {
+            document.querySelectorAll('.sauce-nav-btn').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+
+            currentSauceKey = sauceKey;
+            updateExplorerDisplay();
+        }
+
+        function setPackagingType(type) {
+            currentPackagingType = type;
+
+            document.getElementById('btn-glass').classList.remove('active');
+            document.getElementById('btn-squeeze').classList.remove('active');
+
+            if (type === 'glass') {
+                document.getElementById('btn-glass').classList.add('active');
+            } else {
+                document.getElementById('btn-squeeze').classList.add('active');
+            }
+
+            updateExplorerDisplay();
+        }
+
+        /* Lightbox Control Logic Functions */
+        function openLightbox(imageSource) {
+            const modal = document.getElementById('lightbox-container');
+            const targetDisplayImg = document.getElementById('lightbox-img');
+
+            targetDisplayImg.src = imageSource;
+            modal.style.display = 'flex';
+
+            setTimeout(() => {
+                modal.classList.add('open');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-container');
+            modal.classList.remove('open');
+
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
