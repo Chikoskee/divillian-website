@@ -126,6 +126,7 @@ export default function Home() {
             </div>
           </div>
           <a href="/sauces">Sauces</a>
+          <a href="/merch">Merch</a>
           <a href="#media">Media</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
@@ -308,6 +309,7 @@ export default function Home() {
               <li><a href="#home">Home</a></li>
               <li><a href="#apparel-shop">Shop All</a></li>
               <li><a href="/sauces">Sauces</a></li>
+              <li><a href="/merch">Merch</a></li>
               <li><a href="#about">Our Story</a></li>
               <li><a href="#media">Media Gallery</a></li>
             </ul>

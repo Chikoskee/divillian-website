@@ -1,0 +1,140 @@
+import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
+import { createClient } from '@/lib/supabase/server'
+
+type Props = { params: Promise<{ slug: string }> }
+
+async function getProduct(slug: string) {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('sauces')
+    .select('*')
+    .eq('slug', slug)
+    .eq('is_published', true)
+    .single()
+  return data
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const product = await getProduct(slug)
+  if (!product) return {}
+  return {
+    title: product.seo_title ?? `${product.name} — Divillian Sauces`,
+    description: product.seo_description ?? product.description ?? undefined,
+  }
+}
+
+export default async function SauceDetailPage({ params }: Props) {
+  const { slug } = await params
+  const product = await getProduct(slug)
+  if (!product) notFound()
+
+  const images: string[] = Array.isArray(product.images) ? product.images : []
+  const ingredients: string[] = Array.isArray(product.ingredients) ? product.ingredients : []
+
+  return (
+    <main style={{ padding: '2rem', maxWidth: 960, margin: '0 auto' }}>
+      <a href="/sauces" style={{ color: '#8b0000', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: 1, textDecoration: 'none', display: 'inline-block', marginBottom: '1.5rem' }}>
+        ← Back to Sauces
+      </a>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start' }}>
+
+        {/* Gallery */}
+        <div>
+          {images.length > 0 ? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={images[0]}
+                alt={product.name}
+                style={{ width: '100%', borderRadius: 10, objectFit: 'contain', background: '#f9f9f9', maxHeight: 420 }}
+              />
+              {images.length > 1 && (
+                <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap' }}>
+                  {images.slice(1).map((url, i) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      key={i}
+                      src={url}
+                      alt={`${product.name} ${i + 2}`}
+                      style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 6, border: '1px solid #eee', background: '#f9f9f9' }}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <div style={{ width: '100%', height: 380, background: '#f0f0f0', borderRadius: 10 }} />
+          )}
+        </div>
+
+        {/* Info */}
+        <div>
+          {product.category && (
+            <p style={{ fontSize: '0.8rem', color: '#8b0000', textTransform: 'uppercase', letterSpacing: 2, fontWeight: 700, marginBottom: '0.5rem' }}>
+              {product.category}
+            </p>
+          )}
+
+          <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#111', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: 1 }}>
+            {product.name}
+          </h1>
+
+          {product.price != null && (
+            <p className="price" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
+              ${Number(product.price).toFixed(2)}
+            </p>
+          )}
+
+          {product.description && (
+            <p style={{ color: '#444', lineHeight: 1.8, marginBottom: '1.25rem' }}>{product.description}</p>
+          )}
+
+          <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+            {product.heat_level != null && (
+              <div>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#666' }}>Heat</span>
+                <p style={{ fontWeight: 800, color: '#8b0000', fontSize: '1.1rem', marginTop: 2 }}>
+                  {product.heat_level} / 10
+                </p>
+              </div>
+            )}
+            {product.volume_oz != null && (
+              <div>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#666' }}>Volume</span>
+                <p style={{ fontWeight: 800, color: '#111', fontSize: '1.1rem', marginTop: 2 }}>
+                  {product.volume_oz} oz
+                </p>
+              </div>
+            )}
+          </div>
+
+          {ingredients.length > 0 && (
+            <div style={{ marginBottom: '1.25rem' }}>
+              <p style={{ fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: 1, marginBottom: '0.4rem' }}>Ingredients</p>
+              <p style={{ fontSize: '0.9rem', color: '#555', lineHeight: 1.7 }}>
+                {ingredients.join(', ')}
+              </p>
+            </div>
+          )}
+
+          {product.shopify_url ? (
+            <a
+              href={product.shopify_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="buy-btn"
+              style={{ marginTop: '0.5rem' }}
+            >
+              Buy on Shopify
+            </a>
+          ) : (
+            <p style={{ color: '#888', fontStyle: 'italic', marginTop: '0.5rem' }}>Coming soon</p>
+          )}
+        </div>
+      </div>
+    </main>
+  )
+}
