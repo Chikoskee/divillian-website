@@ -68,7 +68,6 @@ export default async function MerchPage() {
             <h4>Quick Links</h4>
             <ul>
               <li><a href="/#home">Home</a></li>
-              <li><a href="/#apparel-shop">Shop All</a></li>
               <li><a href="/sauces">Sauces</a></li>
               <li><a href="/merch">Merch</a></li>
               <li><a href="/#about">Our Story</a></li>
