@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import ProductCard from '@/app/components/ProductCard'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Merch — Divillian',
@@ -20,10 +21,12 @@ export default async function MerchPage() {
     <>
       <header>
         <nav>
-          <a href="/">Home</a>
-          <a href="/sauces">Sauces</a>
-          <a href="/merch">Merch</a>
-          <a href="/order">Order</a>
+          <Link href="/#home">Home</Link>
+          <Link href="/sauces">Sauces</Link>
+          <Link href="/merch">Merch</Link>
+          <a href="/#media">Media</a>
+          <a href="/#about">About</a>
+          <a href="/#contact">Contact</a>
         </nav>
       </header>
 
@@ -47,30 +50,47 @@ export default async function MerchPage() {
                 price={item.price}
                 images={item.images}
                 href={`/merch/${item.slug}`}
+                buttonLabel="View"
+                buttonHref={`/merch/${item.slug}`}
               />
             ))}
           </div>
         )}
       </div>
 
-      <footer>
+      <footer id="contact">
         <div className="footer-container">
           <div className="footer-section">
-            <h4>Divillian</h4>
-            <p>Bringing the heat since day one.</p>
+            <h4>Divil&apos;Lian</h4>
+            <p>Premium apparel and gourmet flavors crafted in New Jersey, USA. Representing the bold and the authentic since 2026.</p>
           </div>
           <div className="footer-section">
-            <h4>Links</h4>
+            <h4>Quick Links</h4>
             <ul>
-              <li><a href="/">Home</a></li>
+              <li><a href="/#home">Home</a></li>
+              <li><a href="/#apparel-shop">Shop All</a></li>
               <li><a href="/sauces">Sauces</a></li>
               <li><a href="/merch">Merch</a></li>
-              <li><a href="/order">Order</a></li>
+              <li><a href="/#about">Our Story</a></li>
+              <li><a href="/#media">Media Gallery</a></li>
             </ul>
+          </div>
+          <div className="footer-section">
+            <h4>Contact Us</h4>
+            <p>📍 Jersey City, New Jersey, USA</p>
+            <p>📧 info@divillian.com</p>
+            <p>📸 Instagram: @DivilLian</p>
+            <p>🎥 TikTok: @DivilLianOfficial</p>
+          </div>
+          <div className="footer-section">
+            <h4>Newsletter</h4>
+            <p>Get the latest drops and spicy news.</p>
+            <input type="email" placeholder="Enter your email" className="newsletter-input" />
+            <button className="newsletter-btn">Subscribe</button>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Divillian. All rights reserved.</p>
+          <p>&copy; 2026 Divil&apos;Lian. All rights reserved. Made with fire in New Jersey.</p>
         </div>
       </footer>
     </>

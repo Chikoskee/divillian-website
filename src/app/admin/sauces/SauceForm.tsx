@@ -22,6 +22,10 @@ type SauceData = {
   seo_title?: string | null
   seo_description?: string | null
   sort_order?: number | null
+  glass_bottle_shopify_url?: string | null
+  glass_bottle_price?: number | null
+  squeeze_bottle_shopify_url?: string | null
+  squeeze_bottle_price?: number | null
 }
 
 function slugify(str: string) {
@@ -54,6 +58,10 @@ export default function SauceForm({ initialData }: { initialData?: SauceData }) 
     seo_title: initialData?.seo_title ?? '',
     seo_description: initialData?.seo_description ?? '',
     sort_order: initialData?.sort_order != null ? String(initialData.sort_order) : '0',
+    glass_bottle_shopify_url: initialData?.glass_bottle_shopify_url ?? '',
+    glass_bottle_price: initialData?.glass_bottle_price != null ? String(initialData.glass_bottle_price) : '',
+    squeeze_bottle_shopify_url: initialData?.squeeze_bottle_shopify_url ?? '',
+    squeeze_bottle_price: initialData?.squeeze_bottle_price != null ? String(initialData.squeeze_bottle_price) : '',
   })
 
   const [existingImages, setExistingImages] = useState<string[]>(initialData?.images ?? [])
@@ -133,6 +141,10 @@ export default function SauceForm({ initialData }: { initialData?: SauceData }) 
         seo_title: form.seo_title || null,
         seo_description: form.seo_description || null,
         sort_order: form.sort_order !== '' ? parseInt(form.sort_order, 10) : 0,
+        glass_bottle_shopify_url: form.glass_bottle_shopify_url || null,
+        glass_bottle_price: form.glass_bottle_price !== '' ? parseFloat(form.glass_bottle_price) : null,
+        squeeze_bottle_shopify_url: form.squeeze_bottle_shopify_url || null,
+        squeeze_bottle_price: form.squeeze_bottle_price !== '' ? parseFloat(form.squeeze_bottle_price) : null,
       }
 
       const supabase = createClient()
@@ -182,6 +194,21 @@ export default function SauceForm({ initialData }: { initialData?: SauceData }) 
         </Field>
         <Field label="Shopify URL">
           <input name="shopify_url" type="url" value={form.shopify_url} onChange={handleChange} style={inputStyle} />
+        </Field>
+      </Section>
+
+      <Section title="Bottle variants">
+        <Field label="Glass bottle — Shopify URL">
+          <input name="glass_bottle_shopify_url" type="url" value={form.glass_bottle_shopify_url} onChange={handleChange} style={inputStyle} />
+        </Field>
+        <Field label="Glass bottle — Price">
+          <input name="glass_bottle_price" type="number" step="0.01" min="0" value={form.glass_bottle_price} onChange={handleChange} style={{ ...inputStyle, width: '120px' }} />
+        </Field>
+        <Field label="Squeeze bottle — Shopify URL">
+          <input name="squeeze_bottle_shopify_url" type="url" value={form.squeeze_bottle_shopify_url} onChange={handleChange} style={inputStyle} />
+        </Field>
+        <Field label="Squeeze bottle — Price">
+          <input name="squeeze_bottle_price" type="number" step="0.01" min="0" value={form.squeeze_bottle_price} onChange={handleChange} style={{ ...inputStyle, width: '120px' }} />
         </Field>
       </Section>
 

@@ -97,7 +97,8 @@ header a:hover { color: #fff; }
 .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
 .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
 .media-video { width: 100%; max-width: 380px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-.spinning-logo-container img { max-width: 250px; height: auto; margin-top: 20px; }
+.spinning-logo-container { text-align: center; }
+.spinning-logo-container img { max-width: 250px; height: auto; margin: 20px auto 0; }
 
 /* ── Sauces Page ── */
 .page-intro { max-width: 850px; margin: 0 auto 2.5rem; text-align: center; }

@@ -32,6 +32,12 @@ export default async function SauceDetailPage({ params }: Props) {
 
   const images: string[] = Array.isArray(product.images) ? product.images : []
   const ingredients: string[] = Array.isArray(product.ingredients) ? product.ingredients : []
+  const hasVariants = !!(
+    product.glass_bottle_shopify_url ||
+    product.glass_bottle_price != null ||
+    product.squeeze_bottle_shopify_url ||
+    product.squeeze_bottle_price != null
+  )
 
   return (
     <main style={{ padding: '2rem', maxWidth: 960, margin: '0 auto' }}>
@@ -120,7 +126,35 @@ export default async function SauceDetailPage({ params }: Props) {
             </div>
           )}
 
-          {product.shopify_url ? (
+          {hasVariants ? (
+            <div style={{ marginTop: '1rem' }}>
+              <p style={{ fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: 1, marginBottom: '0.75rem' }}>Choose Your Bottle</p>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <div style={{ flex: 1, minWidth: 140, border: '1px solid #e5e5e5', borderRadius: 8, padding: '1rem', textAlign: 'center' }}>
+                  <p style={{ fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: 1, marginBottom: '0.5rem' }}>Glass Bottle</p>
+                  {product.glass_bottle_price != null && (
+                    <p className="price" style={{ marginBottom: '0.75rem' }}>${Number(product.glass_bottle_price).toFixed(2)}</p>
+                  )}
+                  {product.glass_bottle_shopify_url ? (
+                    <a href={product.glass_bottle_shopify_url} target="_blank" rel="noopener noreferrer" className="buy-btn">Buy on Shopify</a>
+                  ) : (
+                    <p style={{ color: '#888', fontStyle: 'italic', fontSize: '0.9rem' }}>Coming soon</p>
+                  )}
+                </div>
+                <div style={{ flex: 1, minWidth: 140, border: '1px solid #e5e5e5', borderRadius: 8, padding: '1rem', textAlign: 'center' }}>
+                  <p style={{ fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: 1, marginBottom: '0.5rem' }}>Squeeze Bottle</p>
+                  {product.squeeze_bottle_price != null && (
+                    <p className="price" style={{ marginBottom: '0.75rem' }}>${Number(product.squeeze_bottle_price).toFixed(2)}</p>
+                  )}
+                  {product.squeeze_bottle_shopify_url ? (
+                    <a href={product.squeeze_bottle_shopify_url} target="_blank" rel="noopener noreferrer" className="buy-btn">Buy on Shopify</a>
+                  ) : (
+                    <p style={{ color: '#888', fontStyle: 'italic', fontSize: '0.9rem' }}>Coming soon</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : product.shopify_url ? (
             <a
               href={product.shopify_url}
               target="_blank"
