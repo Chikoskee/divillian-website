@@ -1,8 +1,8 @@
-import { createClient } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/server'
 import ProductCard from '@/app/components/ProductCard'
 
 export default async function FeaturedDrops() {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const [{ data: merch }, { data: sauces }] = await Promise.all([
     supabase

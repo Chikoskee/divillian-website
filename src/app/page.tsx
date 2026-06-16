@@ -1,38 +1,16 @@
-'use client';
-
-import { useRef, useState } from 'react';
 import Link from 'next/link';
-import FeaturedDrops from '@/app/components/FeaturedDrops'
+import HeroVideo from '@/app/components/HeroVideo';
+import FeaturedDrops from '@/app/components/FeaturedDrops';
 
 export default function Home() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(true);
-
-  function toggleMute() {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setMuted(videoRef.current.muted);
-    }
-  }
-
   return (
     <>
-      {/* Hero Video */}
-      <div id="home">
-        <button className="mute-btn" onClick={toggleMute}>
-          <span>{muted ? '🔇' : '🔊'}</span>
-          <span>{muted ? 'Unmute' : 'Mute'}</span>
-        </button>
-        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-        <video ref={videoRef} id="hero-video" className="full-width-media" autoPlay loop muted playsInline>
-          <source src="/DevTopvideo.mp4" type="video/mp4" />
-        </video>
-      </div>
+      <HeroVideo />
 
       {/* Banner */}
       <div className="middle-banner">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/Banner.png" alt="Divil'Lian Banner" />
+        <img src="/Banner.png" alt="Divil&apos;Lian Banner" />
       </div>
 
       {/* Header */}
