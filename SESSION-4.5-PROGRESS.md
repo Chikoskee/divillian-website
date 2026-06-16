@@ -1,46 +1,42 @@
 # Session 4.5 Progress — Bottle Variants, FeaturedDrops, Nav Polish
 
-## Status: IN PROGRESS (stopping mid-session)
+## Status: COMPLETE
 
 ## What Was Done
 
 ### Bottle Variant Support
 - **`src/app/admin/sauces/SauceForm.tsx`** — Added glass bottle and squeeze bottle fields (Shopify URL + price) to the sauce admin form
 - **`src/app/sauces/[slug]/page.tsx`** — Sauce detail page now renders a "Choose Your Bottle" section when either variant is populated; falls back to single shopify_url if no variants
+- **Verified in browser**: admin form saves correctly, public sauce detail page shows "Choose Your Bottle" section
 
 ### Home Page Refactor
 - **`src/app/page.tsx`** — Removed static shop grid and sauce explorer (hardcoded HTML). Replaced with `<FeaturedDrops />` component that pulls live data from the database
-- **`src/app/components/FeaturedDrops.tsx`** (new, untracked) — Fetches up to 4 recent published merch and 4 recent published sauces and renders them using `ProductCard`
+- **`src/app/components/FeaturedDrops.tsx`** (new) — Fetches up to 4 recent published merch and 4 recent published sauces and renders them using `ProductCard`
+- **Verified in browser**: Featured Drops on home page pulls 4 newest published merch and 4 newest published sauces from Supabase correctly
 
 ### ProductCard Update
 - **`src/app/components/ProductCard.tsx`** — Restructured to be a `<div>` wrapper with a `<Link>` buy button inside (instead of wrapping the whole card in a Link). Added `buttonLabel` and `buttonHref` props.
 
 ### Nav & Footer Polish
 - **`src/app/sauces/page.tsx`** and **`src/app/merch/page.tsx`** — Updated nav to use `<Link>` components; expanded footer to match home page (full 4-column layout with Quick Links, Contact, Newsletter)
+- **Dead "Shop All" footer link** (`/#apparel-shop`) removed from all three public pages (`page.tsx`, `merch/page.tsx`, `sauces/page.tsx`) — commit `ce68d29`
 
 ### CSS Minor Fix
 - **`src/app/globals.css`** — Fixed spinning logo centering (`text-align: center` on container, `margin: 20px auto 0` on img)
 
-## Known Bug: CSS-on-Navigation (Root Cause Diagnosed, Fix Deferred)
+### CSS-on-Navigation Bug Fix (commit `41aa997`)
+**Root Cause**: `FeaturedDrops.tsx` was written as an `async` function (server component pattern) but was imported by `page.tsx` which had `'use client'`. This forced `FeaturedDrops` to be treated as a client component — async client components are unsupported in React, causing a render failure that manifested as broken/missing CSS on navigation.
 
-**Symptom**: CSS appears to break when navigating between pages.
+**Fix applied**:
+1. Extracted video mute button logic into `src/app/components/HeroVideo.tsx` (`'use client'` leaf component)
+2. Removed `'use client'` from `page.tsx` — now a server component
+3. Switched `FeaturedDrops` to use `createClient` from `@/lib/supabase/server` with `await`
+4. All known bugs from this session are now closed
 
-**Root Cause**: `FeaturedDrops.tsx` is written as an `async` function (server component pattern) but is imported directly by `page.tsx` which has `'use client'`. Per Next.js rules, all direct imports of a client component are bundled as client components. Async client components are not supported in React — calling `FeaturedDrops()` returns a Promise, not JSX. This causes a render failure on the home page which manifests as broken/missing layout.
+## All Bugs Closed
+- CSS-on-navigation bug: fixed
+- Dead "Shop All" anchor link: removed
+- No outstanding bugs
 
-The earlier attempt to fix this by swapping `<a>` to `<Link>` in nav links was a red herring — the bug is in the component architecture, not the link type.
-
-**Known Fix (defer to Session 5)**:
-1. Extract the video mute button logic into a small `'use client'` component (`HeroVideo.tsx`)
-2. Remove `'use client'` from `page.tsx` — it becomes a server component
-3. Update `FeaturedDrops` to use `createClient` from `@/lib/supabase/server` instead of browser client
-4. `FeaturedDrops` will then work correctly as an async server component
-
-## Still To Do (Session 5)
-
-- [ ] Fix FeaturedDrops (extract HeroVideo, make page.tsx server component)
-- [ ] Investigate second bug (not yet identified — user ran out of tokens)
-- [ ] Test bottle variant feature end-to-end (admin form → detail page)
-- [ ] Connect home page hero section to the database-driven FeaturedDrops (once bug fixed)
-
-## Branch
-`add-admin-nextjs`
+## Next Session: Session 5
+- Deploy to a live URL
