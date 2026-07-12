@@ -1,8 +1,18 @@
 import Link from 'next/link';
 import HeroVideo from '@/app/components/HeroVideo';
-import FeaturedDrops from '@/app/components/FeaturedDrops';
+import SaucesPreview from '@/app/components/SaucesPreview';
+import MerchCatalog from '@/app/merch/MerchCatalog';
+import { createClient } from '@/lib/supabase/server';
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const { data: merchItems } = await supabase
+    .from('merch')
+    .select('id, name, slug, price, images, category')
+    .eq('is_published', true)
+    .order('sort_order', { ascending: true })
+    .order('name', { ascending: true });
+
   return (
     <>
       <HeroVideo />
@@ -25,7 +35,18 @@ export default function Home() {
         </nav>
       </header>
 
-      <FeaturedDrops />
+      <div className="container" id="apparel-shop">
+        <h2 className="section-title">Merch</h2>
+        {!merchItems || merchItems.length === 0 ? (
+          <p style={{ textAlign: 'center', color: '#666', marginTop: '3rem' }}>
+            No merch available yet — check back soon.
+          </p>
+        ) : (
+          <MerchCatalog items={merchItems} />
+        )}
+      </div>
+
+      <SaucesPreview />
 
       {/* About */}
       <div id="about" className="container">

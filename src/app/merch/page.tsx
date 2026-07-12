@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
-import ProductCard from '@/app/components/ProductCard'
+import MerchCatalog from './MerchCatalog'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export default async function MerchPage() {
   const supabase = await createClient()
   const { data: items } = await supabase
     .from('merch')
-    .select('id, name, slug, price, images')
+    .select('id, name, slug, price, images, category')
     .eq('is_published', true)
     .order('sort_order', { ascending: true })
     .order('name', { ascending: true })
@@ -42,19 +42,7 @@ export default async function MerchPage() {
             No merch available yet — check back soon.
           </p>
         ) : (
-          <div className="shop-grid">
-            {items.map(item => (
-              <ProductCard
-                key={item.id}
-                name={item.name}
-                price={item.price}
-                images={item.images}
-                href={`/merch/${item.slug}`}
-                buttonLabel="View"
-                buttonHref={`/merch/${item.slug}`}
-              />
-            ))}
-          </div>
+          <MerchCatalog items={items} />
         )}
       </div>
 
