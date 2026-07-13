@@ -51,7 +51,7 @@ export default async function MerchDetailPage({ params }: Props) {
           ← Back to Merch
         </a>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start' }}>
+        <div className="product-detail-grid">
 
           {/* Gallery */}
           <div>
@@ -89,11 +89,11 @@ export default async function MerchDetailPage({ params }: Props) {
                 {product.category}
               </p>
             )}
-            <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#111', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: 1 }}>
+            <h1 style={{ fontSize: 'clamp(1.5rem, 6vw, 2rem)', fontWeight: 800, color: '#111', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: 1 }}>
               {product.name}
             </h1>
             {product.price != null && (
-              <p className="price" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
+              <p className="price" style={{ fontSize: 'clamp(1.25rem, 4vw, 1.5rem)', marginBottom: '1rem' }}>
                 ${Number(product.price).toFixed(2)}
               </p>
             )}

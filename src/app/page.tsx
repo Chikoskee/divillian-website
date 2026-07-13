@@ -52,7 +52,7 @@ export default async function Home() {
       <div id="about" className="container">
         <h2 className="section-title">About Divil&apos;Lian</h2>
         <div className="about-text">
-          <p style={{ fontSize: '1.5rem', fontWeight: 700, lineHeight: 1.4, color: '#111', letterSpacing: '0.5px' }}>
+          <p className="about-lead">
             Doing what you got to do to survive, for those who look over the skies but over looked by some eyes but are overlooked by some eyes. Born in New Jersey, the little big brother of the east, for those trying to scrap for a plate at the feast! Divil&apos;Lians.
           </p>
         </div>
