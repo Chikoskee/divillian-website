@@ -6,7 +6,7 @@ export default async function SaucesListPage() {
   const supabase = await createClient()
   const { data: items } = await supabase
     .from('sauces')
-    .select('id, name, heat_level, volume_oz, is_published')
+    .select('id, name, heat_level, volume_oz, is_published, images')
     .order('sort_order', { ascending: true })
 
   return (
@@ -22,6 +22,7 @@ export default async function SaucesListPage() {
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
           <thead>
             <tr style={{ borderBottom: '2px solid #e5e5e5', textAlign: 'left' }}>
+              <th style={th}></th>
               <th style={th}>Name</th>
               <th style={th}>Heat level</th>
               <th style={th}>Volume (oz)</th>
@@ -32,6 +33,18 @@ export default async function SaucesListPage() {
           <tbody>
             {items.map(item => (
               <tr key={item.id} style={{ borderBottom: '1px solid #e5e5e5' }}>
+                <td style={td}>
+                  {item.images?.[0] ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={item.images[0]}
+                      alt=""
+                      style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 6, border: '1px solid #eee', background: '#f9f9f9' }}
+                    />
+                  ) : (
+                    <div style={{ width: 44, height: 44, borderRadius: 6, border: '1px solid #eee', background: '#f0f0f0' }} />
+                  )}
+                </td>
                 <td style={td}>{item.name}</td>
                 <td style={td}>{item.heat_level ?? '—'}</td>
                 <td style={td}>{item.volume_oz ?? '—'}</td>
