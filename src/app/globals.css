@@ -91,8 +91,12 @@ header a:hover { color: #fff; }
 .lightbox-modal.open { opacity: 1; pointer-events: auto; }
 .lightbox-content { max-width: 90%; max-height: 85vh; object-fit: contain; border-radius: 6px; transform: scale(0.9); transition: transform 0.3s ease; box-shadow: 0 5px 25px rgba(0,0,0,0.5); }
 .lightbox-modal.open .lightbox-content { transform: scale(1); }
-.lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; user-select: none; transition: 0.2s; }
+.lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; user-select: none; transition: 0.2s; background: none; border: none; padding: 0; line-height: 1; font-family: inherit; }
 .lightbox-close:hover { color: #ffcccc; }
+
+/* ── Product Gallery (detail pages) ── */
+.zoomable-img { cursor: zoom-in; transition: transform 0.3s ease; }
+.zoomable-img:hover { transform: scale(1.02); }
 
 /* ── Media ── */
 .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
