@@ -12,6 +12,7 @@ type MerchListItem = {
   price: number | null
   stock_status: string | null
   is_published: boolean
+  images: string[] | null
 }
 
 export default function MerchTable({ items }: { items: MerchListItem[] }) {
@@ -75,6 +76,7 @@ export default function MerchTable({ items }: { items: MerchListItem[] }) {
                 onChange={toggleAll}
               />
             </th>
+            <th style={th}></th>
             <th style={th}>Name</th>
             <th style={th}>Price</th>
             <th style={th}>Stock</th>
@@ -91,6 +93,18 @@ export default function MerchTable({ items }: { items: MerchListItem[] }) {
                   checked={selectedIds.has(item.id)}
                   onChange={() => toggleOne(item.id)}
                 />
+              </td>
+              <td style={td}>
+                {item.images?.[0] ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={item.images[0]}
+                    alt=""
+                    style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 6, border: '1px solid #eee', background: '#f9f9f9' }}
+                  />
+                ) : (
+                  <div style={{ width: 44, height: 44, borderRadius: 6, border: '1px solid #eee', background: '#f0f0f0' }} />
+                )}
               </td>
               <td style={td}>{item.name}</td>
               <td style={td}>{item.price != null ? `$${Number(item.price).toFixed(2)}` : '—'}</td>

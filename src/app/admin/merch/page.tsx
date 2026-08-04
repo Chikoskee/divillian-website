@@ -6,7 +6,7 @@ export default async function MerchListPage() {
   const supabase = await createClient()
   const { data: items } = await supabase
     .from('merch')
-    .select('id, name, price, stock_status, is_published')
+    .select('id, name, price, stock_status, is_published, images')
     .order('sort_order', { ascending: true })
 
   return (
