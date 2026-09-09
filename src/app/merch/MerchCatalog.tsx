@@ -22,30 +22,44 @@ export default function MerchCatalog({ items }: { items: MerchItem[] }) {
     [items]
   )
 
-  const [selected, setSelected] = useState<string | null>(null)
+  const hasTops = categories.includes('tops')
+  const otherCategories = categories.filter(c => c !== 'tops')
+
+  const [selected, setSelected] = useState<string | null>(hasTops ? 'tops' : null)
 
   const filtered = selected ? items.filter(item => item.category === selected) : items
 
   return (
     <>
       {categories.length > 0 && (
-        <div className="category-filter">
-          <button
-            className={`category-filter-btn${selected === null ? ' active' : ''}`}
-            onClick={() => setSelected(null)}
-          >
-            All
-          </button>
-          {categories.map(category => (
+        <>
+          <p className="category-filter-legend">Browse by category — tap a tag to find your fit.</p>
+          <div className="category-filter">
+            {hasTops && (
+              <button
+                className={`category-filter-btn${selected === 'tops' ? ' active' : ''}`}
+                onClick={() => setSelected('tops')}
+              >
+                Tops
+              </button>
+            )}
             <button
-              key={category}
-              className={`category-filter-btn${selected === category ? ' active' : ''}`}
-              onClick={() => setSelected(category)}
+              className={`category-filter-btn${selected === null ? ' active' : ''}`}
+              onClick={() => setSelected(null)}
             >
-              {labelCase(category)}
+              All
             </button>
-          ))}
-        </div>
+            {otherCategories.map(category => (
+              <button
+                key={category}
+                className={`category-filter-btn${selected === category ? ' active' : ''}`}
+                onClick={() => setSelected(category)}
+              >
+                {labelCase(category)}
+              </button>
+            ))}
+          </div>
+        </>
       )}
 
       {filtered.length === 0 ? (

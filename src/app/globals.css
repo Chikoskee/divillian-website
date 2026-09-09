@@ -137,6 +137,7 @@ header a:hover { color: #fff; }
 .spinning-logo-container img { max-width: 250px; height: auto; margin: 20px auto 0; }
 
 /* ── Category Filter ── */
+.category-filter-legend { text-align: center; color: #888; font-size: 0.85rem; font-style: italic; margin-bottom: 12px; }
 .category-filter { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
 .category-filter-btn { background: #f0f0f0; border: 2px solid #ddd; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
 .category-filter-btn.active, .category-filter-btn:hover { background: #8b0000; color: white; border-color: #8b0000; }
