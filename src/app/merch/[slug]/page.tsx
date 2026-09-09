@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import ProductImageGallery from '@/app/components/ProductImageGallery'
+import SocialIcons from '@/app/components/SocialIcons'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -135,6 +136,10 @@ export default async function MerchDetailPage({ params }: Props) {
               <li><a href="/merch">Merch</a></li>
               <li><a href="/order">Order</a></li>
             </ul>
+          </div>
+          <div className="footer-section">
+            <h4>Follow Us</h4>
+            <SocialIcons />
           </div>
         </div>
         <div className="footer-bottom">

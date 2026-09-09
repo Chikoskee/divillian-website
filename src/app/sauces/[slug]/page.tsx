@@ -65,12 +65,6 @@ export default async function SauceDetailPage({ params }: Props) {
             {product.name}
           </h1>
 
-          {product.price != null && (
-            <p className="price" style={{ fontSize: 'clamp(1.25rem, 4vw, 1.5rem)', marginBottom: '1rem' }}>
-              ${Number(product.price).toFixed(2)}
-            </p>
-          )}
-
           {product.description && (
             <p style={{ color: '#444', lineHeight: 1.8, marginBottom: '1.25rem' }}>{product.description}</p>
           )}
@@ -142,7 +136,9 @@ export default async function SauceDetailPage({ params }: Props) {
               Buy on Shopify
             </a>
           ) : (
-            <p style={{ color: '#888', fontStyle: 'italic', marginTop: '0.5rem' }}>Coming soon</p>
+            <button type="button" className="buy-btn" style={{ marginTop: '0.5rem' }} disabled>
+              Free Sample
+            </button>
           )}
         </div>
       </div>

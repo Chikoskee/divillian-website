@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
-import ProductCard from '@/app/components/ProductCard'
+import SauceCard from '@/app/components/SauceCard'
+import SocialIcons from '@/app/components/SocialIcons'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export default async function SaucesPage() {
   const supabase = await createClient()
   const { data: items } = await supabase
     .from('sauces')
-    .select('id, name, slug, price, images')
+    .select('id, name, description, heat_level, images')
     .eq('is_published', true)
     .order('sort_order', { ascending: true })
     .order('name', { ascending: true })
@@ -42,16 +43,14 @@ export default async function SaucesPage() {
             No sauces available yet — check back soon.
           </p>
         ) : (
-          <div className="shop-grid">
+          <div className="sauce-gallery">
             {items.map(item => (
-              <ProductCard
+              <SauceCard
                 key={item.id}
                 name={item.name}
-                price={item.price}
+                description={item.description}
+                heatLevel={item.heat_level}
                 images={item.images}
-                href={`/sauces/${item.slug}`}
-                buttonLabel="View"
-                buttonHref={`/sauces/${item.slug}`}
               />
             ))}
           </div>
@@ -78,8 +77,7 @@ export default async function SaucesPage() {
             <h4>Contact Us</h4>
             <p>📍 Jersey City, New Jersey, USA</p>
             <p>📧 info@divillian.com</p>
-            <p>📸 Instagram: @DivilLian</p>
-            <p>🎥 TikTok: @DivilLianOfficial</p>
+            <SocialIcons />
           </div>
           <div className="footer-section">
             <h4>Newsletter</h4>

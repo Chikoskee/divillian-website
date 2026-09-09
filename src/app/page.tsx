@@ -1,8 +1,15 @@
 import Link from 'next/link';
 import HeroVideo from '@/app/components/HeroVideo';
-import SaucesPreview from '@/app/components/SaucesPreview';
+import SaucesTeaser from '@/app/components/SaucesTeaser';
+import SocialIcons from '@/app/components/SocialIcons';
 import MerchCatalog from '@/app/merch/MerchCatalog';
 import { createClient } from '@/lib/supabase/server';
+
+const VIDEO_PLACEHOLDERS = [
+  { title: 'Behind the Heat', description: 'A look at how the sauces come together.' },
+  { title: 'Street Heat Lookbook', description: 'Styling the latest apparel drop.' },
+  { title: 'Flavor Drop Teaser', description: "A first taste of what's cooking next." },
+];
 
 export default async function Home() {
   const supabase = await createClient();
@@ -46,7 +53,7 @@ export default async function Home() {
         )}
       </div>
 
-      <SaucesPreview />
+      <SaucesTeaser />
 
       {/* About */}
       <div id="about" className="container">
@@ -61,13 +68,19 @@ export default async function Home() {
       {/* Media */}
       <section id="media" className="media-section">
         <h2 className="section-title">Media</h2>
-        <div className="video-grid">
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video className="media-video" controls playsInline><source src="/Samplevideo1.mp4" type="video/mp4" /></video>
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video className="media-video" controls playsInline><source src="/Samplevideo2.mp4" type="video/mp4" /></video>
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video className="media-video" controls playsInline><source src="/SampleVideo3.mp4" type="video/mp4" /></video>
+        <div className="video-placeholder-grid">
+          {VIDEO_PLACEHOLDERS.map(video => (
+            <div className="video-placeholder-card" key={video.title}>
+              <div className="video-placeholder-thumb">
+                <span className="teaser-badge">Coming Soon</span>
+                <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <h4>{video.title}</h4>
+              <p>{video.description}</p>
+            </div>
+          ))}
         </div>
         <div className="spinning-logo-container">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -96,8 +109,7 @@ export default async function Home() {
             <h4>Contact Us</h4>
             <p>📍 Jersey City, New Jersey, USA</p>
             <p>📧 info@divillian.com</p>
-            <p>📸 Instagram: @DivilLian</p>
-            <p>🎥 TikTok: @DivilLianOfficial</p>
+            <SocialIcons />
           </div>
           <div className="footer-section">
             <h4>Newsletter</h4>

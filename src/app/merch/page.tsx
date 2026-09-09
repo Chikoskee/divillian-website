@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import MerchCatalog from './MerchCatalog'
+import SocialIcons from '@/app/components/SocialIcons'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -66,8 +67,7 @@ export default async function MerchPage() {
             <h4>Contact Us</h4>
             <p>📍 Jersey City, New Jersey, USA</p>
             <p>📧 info@divillian.com</p>
-            <p>📸 Instagram: @DivilLian</p>
-            <p>🎥 TikTok: @DivilLianOfficial</p>
+            <SocialIcons />
           </div>
           <div className="footer-section">
             <h4>Newsletter</h4>
