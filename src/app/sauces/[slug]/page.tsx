@@ -137,7 +137,7 @@ export default async function SauceDetailPage({ params }: Props) {
             </a>
           ) : (
             <button type="button" className="buy-btn" style={{ marginTop: '0.5rem' }} disabled>
-              Free Sample
+              Buy Now
             </button>
           )}
         </div>

@@ -1,3 +1,8 @@
+'use client'
+
+import { useState } from 'react'
+import Lightbox from './Lightbox'
+
 type Props = {
   name: string
   description: string | null
@@ -6,13 +11,14 @@ type Props = {
 }
 
 export default function SauceCard({ name, description, heatLevel, images }: Props) {
+  const [openImage, setOpenImage] = useState(false)
   const firstImage = Array.isArray(images) ? images[0] : null
 
   return (
     <div className="sauce-card">
       {firstImage ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={firstImage} alt={name} />
+        <img src={firstImage} alt={name} onClick={() => setOpenImage(true)} />
       ) : (
         <div className="sauce-card-placeholder">
           <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -29,8 +35,12 @@ export default function SauceCard({ name, description, heatLevel, images }: Prop
         </p>
       )}
       <button type="button" className="buy-btn" disabled>
-        Free Sample
+        Buy Now
       </button>
+
+      {openImage && firstImage && (
+        <Lightbox src={firstImage} alt={name} onClose={() => setOpenImage(false)} />
+      )}
     </div>
   )
 }

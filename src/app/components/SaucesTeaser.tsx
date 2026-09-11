@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
+import SauceTeaserImage from './SauceTeaserImage'
 
 export default async function SaucesTeaser() {
   const supabase = await createClient()
@@ -26,17 +27,16 @@ export default async function SaucesTeaser() {
             const firstImage = Array.isArray(sauce.images) ? sauce.images[0] : null
             return (
               <div className="teaser-card" key={sauce.id}>
-                <div className="teaser-card-media">
-                  {firstImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={firstImage} alt={sauce.name} />
-                  ) : (
+                {firstImage ? (
+                  <SauceTeaserImage src={firstImage} alt={sauce.name} />
+                ) : (
+                  <div className="sauce-card-placeholder">
                     <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                       <path d="M8 2c.5 1.5-1 2-1 4a3 3 0 0 0 6 0c0-.8-.3-1.3-.6-1.8" strokeLinecap="round" strokeLinejoin="round" />
                       <path d="M6 9h12l-1 11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 9Z" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                  )}
-                </div>
+                  </div>
+                )}
                 <h4>{sauce.name}</h4>
               </div>
             )
