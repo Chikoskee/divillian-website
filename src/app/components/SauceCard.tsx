@@ -1,7 +1,4 @@
-'use client'
-
-import { useState } from 'react'
-import Lightbox from './Lightbox'
+import ProductImageGallery from './ProductImageGallery'
 
 type Props = {
   name: string
@@ -11,14 +8,12 @@ type Props = {
 }
 
 export default function SauceCard({ name, description, heatLevel, images }: Props) {
-  const [openImage, setOpenImage] = useState(false)
-  const firstImage = Array.isArray(images) ? images[0] : null
+  const imageList = Array.isArray(images) ? images : []
 
   return (
     <div className="sauce-card">
-      {firstImage ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={firstImage} alt={name} onClick={() => setOpenImage(true)} />
+      {imageList.length > 0 ? (
+        <ProductImageGallery images={imageList} alt={name} />
       ) : (
         <div className="sauce-card-placeholder">
           <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -37,10 +32,6 @@ export default function SauceCard({ name, description, heatLevel, images }: Prop
       <button type="button" className="buy-btn" disabled>
         Buy Now
       </button>
-
-      {openImage && firstImage && (
-        <Lightbox src={firstImage} alt={name} onClose={() => setOpenImage(false)} />
-      )}
     </div>
   )
 }
