@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 type Props = {
   src: string
@@ -9,7 +10,11 @@ type Props = {
 }
 
 export default function Lightbox({ src, alt, onClose }: Props) {
+  const [mounted, setMounted] = useState(false)
+
   useEffect(() => {
+    setMounted(true)
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
@@ -24,7 +29,9 @@ export default function Lightbox({ src, alt, onClose }: Props) {
     }
   }, [onClose])
 
-  return (
+  if (!mounted) return null
+
+  return createPortal(
     <div
       className="lightbox-modal open"
       onClick={onClose}
@@ -42,6 +49,7 @@ export default function Lightbox({ src, alt, onClose }: Props) {
         className="lightbox-content"
         onClick={(e) => e.stopPropagation()}
       />
-    </div>
+    </div>,
+    document.body
   )
 }

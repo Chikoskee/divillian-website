@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 type Props = {
   flavor: string
@@ -11,8 +12,11 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mwlkdvav'
 
 export default function FreeSampleModal({ flavor, onClose }: Props) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
@@ -51,7 +55,9 @@ export default function FreeSampleModal({ flavor, onClose }: Props) {
     }
   }
 
-  return (
+  if (!mounted) return null
+
+  return createPortal(
     <div
       className="free-sample-modal open"
       onClick={onClose}
@@ -126,6 +132,7 @@ export default function FreeSampleModal({ flavor, onClose }: Props) {
           </form>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
