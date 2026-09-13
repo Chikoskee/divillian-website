@@ -23,8 +23,8 @@ export default async function SaucesPage() {
       <header>
         <nav>
           <Link href="/#home">Home</Link>
-          <Link href="/sauces">Sauces</Link>
           <Link href="/merch">Merch</Link>
+          <Link href="/sauces">Sauces</Link>
           <a href="/#media">Media</a>
           <a href="/#about">About</a>
           <a href="/#contact">Contact</a>
@@ -67,16 +67,16 @@ export default async function SaucesPage() {
             <h4>Quick Links</h4>
             <ul>
               <li><a href="/#home">Home</a></li>
-              <li><a href="/sauces">Sauces</a></li>
               <li><a href="/merch">Merch</a></li>
+              <li><a href="/sauces">Sauces</a></li>
               <li><a href="/#about">Our Story</a></li>
               <li><a href="/#media">Media Gallery</a></li>
             </ul>
           </div>
           <div className="footer-section">
             <h4>Contact Us</h4>
-            <p>📍 Jersey City, New Jersey, USA</p>
-            <p>📧 info@divillian.com</p>
+            <p>📍 New Jersey, USA</p>
+            <p>📧 divilianmerch@gmail.com</p>
             <SocialIcons />
           </div>
           <div className="footer-section">

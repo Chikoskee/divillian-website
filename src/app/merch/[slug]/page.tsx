@@ -42,8 +42,8 @@ export default async function MerchDetailPage({ params }: Props) {
       <header>
         <nav>
           <a href="/">Home</a>
-          <a href="/sauces">Sauces</a>
           <a href="/merch">Merch</a>
+          <a href="/sauces">Sauces</a>
           <a href="/order">Order</a>
         </nav>
       </header>
@@ -132,8 +132,8 @@ export default async function MerchDetailPage({ params }: Props) {
             <h4>Links</h4>
             <ul>
               <li><a href="/">Home</a></li>
-              <li><a href="/sauces">Sauces</a></li>
               <li><a href="/merch">Merch</a></li>
+              <li><a href="/sauces">Sauces</a></li>
               <li><a href="/order">Order</a></li>
             </ul>
           </div>

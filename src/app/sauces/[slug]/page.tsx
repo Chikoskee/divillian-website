@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import ProductImageGallery from '@/app/components/ProductImageGallery'
+import FreeSampleButton from '@/app/components/FreeSampleButton'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -136,9 +137,7 @@ export default async function SauceDetailPage({ params }: Props) {
               Buy on Shopify
             </a>
           ) : (
-            <button type="button" className="buy-btn" style={{ marginTop: '0.5rem' }} disabled>
-              Buy Now
-            </button>
+            <FreeSampleButton flavor={product.name} style={{ marginTop: '0.5rem' }} />
           )}
         </div>
       </div>

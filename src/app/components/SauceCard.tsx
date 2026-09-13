@@ -1,4 +1,5 @@
 import ProductImageGallery from './ProductImageGallery'
+import FreeSampleButton from './FreeSampleButton'
 
 type Props = {
   name: string
@@ -29,9 +30,7 @@ export default function SauceCard({ name, description, heatLevel, images }: Prop
           {'🔥'.repeat(Math.max(1, Math.round(heatLevel / 2)))}
         </p>
       )}
-      <button type="button" className="buy-btn" disabled>
-        Buy Now
-      </button>
+      <FreeSampleButton flavor={name} />
     </div>
   )
 }

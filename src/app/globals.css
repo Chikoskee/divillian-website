@@ -125,6 +125,46 @@ header a:hover { color: #fff; }
 .lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; user-select: none; transition: 0.2s; background: none; border: none; padding: 0; line-height: 1; font-family: inherit; }
 .lightbox-close:hover { color: #ffcccc; }
 
+/* ── Free Sample Modal ── */
+.free-sample-modal {
+  position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem;
+}
+.free-sample-modal.open { opacity: 1; pointer-events: auto; }
+.free-sample-card {
+  position: relative; background: #fff; border-radius: 10px; padding: 2rem;
+  width: 100%; max-width: 460px; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+.free-sample-close {
+  position: absolute; top: 12px; right: 16px; background: none; border: none;
+  font-size: 28px; font-weight: bold; line-height: 1; cursor: pointer; color: #888;
+  font-family: inherit; padding: 0;
+}
+.free-sample-close:hover { color: #8b0000; }
+.free-sample-form h3, .free-sample-success h3 {
+  margin-bottom: 0.5rem; font-size: 1.3rem; color: #8b0000; text-transform: uppercase; letter-spacing: 1px;
+}
+.free-sample-subtitle { color: #555; margin-bottom: 1.25rem; font-size: 0.95rem; }
+.free-sample-field {
+  display: block; font-weight: 700; font-size: 0.8rem; text-transform: uppercase;
+  letter-spacing: 0.5px; color: #333; margin-bottom: 0.9rem;
+}
+.free-sample-field input {
+  display: block; width: 100%; margin-top: 6px; padding: 12px; border-radius: 5px;
+  border: 1px solid #ccc; font-family: inherit; font-size: 1rem;
+}
+.free-sample-field input:focus { outline: none; border-color: #8b0000; }
+.free-sample-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.free-sample-row .free-sample-field { flex: 1; min-width: 100px; }
+.free-sample-error { color: #b00020; font-size: 0.9rem; margin-bottom: 1rem; }
+.free-sample-success p { color: #444; line-height: 1.6; margin-bottom: 1.5rem; }
+@media (max-width: 480px) {
+  .free-sample-card { padding: 1.5rem 1.25rem; }
+  .free-sample-row { flex-direction: column; gap: 0; }
+}
+
 /* ── Product Gallery (detail pages) ── */
 .zoomable-img { cursor: zoom-in; transition: transform 0.3s ease; }
 .zoomable-img:hover { transform: scale(1.02); }
