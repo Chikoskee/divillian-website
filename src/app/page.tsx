@@ -42,6 +42,13 @@ export default async function Home() {
         </nav>
       </header>
 
+      <div className="spinning-logo-section">
+        <div className="spinning-logo-container">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/spinninglogo.gif" alt="Spinning Logo" />
+        </div>
+      </div>
+
       <div className="container" id="apparel-shop">
         <h2 className="section-title">Merch</h2>
         {!merchItems || merchItems.length === 0 ? (
