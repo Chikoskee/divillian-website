@@ -56,8 +56,24 @@
         .dropdown-content a:hover { background-color: #8b0000; color: #fff; }
         .dropdown:hover .dropdown-content { display: block; }
 
+        /* Spinning Logo Between Header and Merch */
+        .spinning-logo-container {
+            text-align: center;
+            padding: 3rem 0; /* Equal space top and bottom */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .spinning-logo-container img {
+            max-width: 250px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
         /* Shop Grid */
         .container { padding: 4rem 1rem; max-width: 1200px; margin: auto; }
+        #apparel-shop { padding-top: 0; } /* Removes extra top padding so the gap from the logo stays even */
         .section-title { text-align: center; margin-bottom: 2rem; font-size: 2.2rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
         .shop-item { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; display: block; }
@@ -132,9 +148,8 @@
 
         /* Media Section */
         .media-section { background: #fff; padding: 5rem 1rem; text-align: center; border-top: 1px solid #eee; }
-        .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
+        .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
         .media-video { width: 100%; max-width: 380px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .spinning-logo-container img { max-width: 250px; height: auto; margin-top: 20px; }
 
         /* Footer Styles */
         footer { background: #8b0000; color: #fff; padding: 4rem 1rem 1rem; border-top: 5px solid #000; }
@@ -153,6 +168,8 @@
         /* Responsive Settings */
         @media (max-width: 768px) {
             .sauces-showcase { grid-template-columns: 1fr; gap: 30px; padding: 20px; }
+            .spinning-logo-container { padding: 2rem 0; }
+            .spinning-logo-container img { max-width: 180px; }
         }
     </style>
 </head>
@@ -175,7 +192,7 @@
         <nav>
             <a href="#home">Home</a>
             <div class="dropdown">
-                <a href="#apparel-shop" onclick="filterShop('all')">Shop ▾</a>
+                <a href="#apparel-shop" onclick="filterShop('all')">Merch ▾</a>
                 <div class="dropdown-content">
                     <a onclick="filterShop('tshirt')">T-Shirts</a>
                     <a onclick="filterShop('hoodie')">Hoodies</a>
@@ -192,8 +209,13 @@
         </nav>
     </header>
 
+    <!-- Spinning Logo Positioned Between Header and Merch -->
+    <div class="spinning-logo-container">
+        <img src="spinninglogo.gif" alt="Spinning Logo">
+    </div>
+
     <div class="container" id="apparel-shop">
-        <h2 class="section-title">Full Collection</h2>
+        <h2 class="section-title">Merch</h2>
         <div class="shop-grid">
             <div class="shop-item skimask"><img src="SkiMask-2.jpg"><h4>Signature Ski Mask</h4><p class="price">$30.00</p><a href="order.html" class="buy-btn">Buy Now</a></div>
             <div class="shop-item facemask"><img src="FaceMask-black.jpg"><h4>Black Face Mask</h4><p class="price">$15.00</p><a href="order.html" class="buy-btn">Buy Now</a></div>
@@ -267,7 +289,6 @@
             <video class="media-video" controls playsinline><source src="Samplevideo2.mp4" type="video/mp4"></video>
             <video class="media-video" controls playsinline><source src="SampleVideo3.mp4" type="video/mp4"></video>
         </div>
-        <div class="spinning-logo-container"><img src="spinninglogo.gif" alt="Spinning Logo"></div>
     </section>
 
     <footer id="contact">
@@ -384,7 +405,6 @@
             targetDisplayImg.src = imageSource;
             modal.style.display = 'flex';
             
-            // Allow layout engine paint pass before appending CSS animations
             setTimeout(() => {
                 modal.classList.add('open');
             }, 10);
@@ -394,7 +414,6 @@
             const modal = document.getElementById('lightbox-container');
             modal.classList.remove('open');
             
-            // Delay actual DOM node extraction until transition fadeout sequence finishes
             setTimeout(() => {
                 modal.style.display = 'none';
             }, 300);
