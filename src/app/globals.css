@@ -151,11 +151,12 @@ header a:hover { color: #fff; }
   display: block; font-weight: 700; font-size: 0.8rem; text-transform: uppercase;
   letter-spacing: 0.5px; color: #333; margin-bottom: 0.9rem;
 }
-.free-sample-field input {
+.free-sample-field input, .free-sample-field textarea {
   display: block; width: 100%; margin-top: 6px; padding: 12px; border-radius: 5px;
   border: 1px solid #ccc; font-family: inherit; font-size: 1rem;
 }
-.free-sample-field input:focus { outline: none; border-color: #8b0000; }
+.free-sample-field textarea { resize: vertical; }
+.free-sample-field input:focus, .free-sample-field textarea:focus { outline: none; border-color: #8b0000; }
 .free-sample-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .free-sample-row .free-sample-field { flex: 1; min-width: 100px; }
 .free-sample-error { color: #b00020; font-size: 0.9rem; margin-bottom: 1rem; }

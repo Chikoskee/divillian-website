@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import ProductImageGallery from '@/app/components/ProductImageGallery'
 import SocialIcons from '@/app/components/SocialIcons'
+import CustomDesignSection from '@/app/components/CustomDesignSection'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -91,8 +92,8 @@ export default async function MerchDetailPage({ params }: Props) {
             {colors.length > 0 && (
               <div style={{ marginBottom: '1rem' }}>
                 <p style={{ fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: 1, marginBottom: '0.4rem' }}>Colors</p>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                  {colors.map(c => <Pill key={c} label={c} />)}
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                  {colors.map(c => <ColorSwatch key={c} name={c} />)}
                 </div>
               </div>
             )}
@@ -118,6 +119,8 @@ export default async function MerchDetailPage({ params }: Props) {
             ) : (
               <p style={{ color: '#888', fontStyle: 'italic', marginTop: '0.5rem' }}>Coming soon</p>
             )}
+
+            <CustomDesignSection productName={product.name} />
           </div>
         </div>
       </div>
@@ -147,6 +150,81 @@ export default async function MerchDetailPage({ params }: Props) {
         </div>
       </footer>
     </>
+  )
+}
+
+const COLOR_NAME_MAP: Record<string, string> = {
+  black: '#111',
+  white: '#fff',
+  red: '#b00020',
+  blue: '#1e40af',
+  navy: '#1e293b',
+  green: '#166534',
+  grey: '#6b7280',
+  gray: '#6b7280',
+  orange: '#c2410c',
+  yellow: '#ca8a04',
+  purple: '#6b21a8',
+  pink: '#db2777',
+  brown: '#78350f',
+  beige: '#e8dcc8',
+  tan: '#d2b48c',
+  olive: '#4d5d21',
+  maroon: '#7f1d1d',
+  teal: '#0f766e',
+  charcoal: '#374151',
+  cream: '#fdf6e3',
+  ivory: '#fffff0',
+  khaki: '#bdb76b',
+  silver: '#c0c0c0',
+  gold: '#d4af37',
+}
+
+// Standard CSS named colors, used to validate a fallback lowercase name before using it as a raw color value.
+const CSS_NAMED_COLORS = new Set([
+  'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque', 'black', 'blanchedalmond',
+  'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue', 'chartreuse', 'chocolate', 'coral', 'cornflowerblue',
+  'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgreen', 'darkgrey',
+  'darkkhaki', 'darkmagenta', 'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon', 'darkseagreen',
+  'darkslateblue', 'darkslategray', 'darkslategrey', 'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue',
+  'dimgray', 'dimgrey', 'dodgerblue', 'firebrick', 'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro',
+  'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'greenyellow', 'grey', 'honeydew', 'hotpink', 'indianred',
+  'indigo', 'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'lightblue', 'lightcoral',
+  'lightcyan', 'lightgoldenrodyellow', 'lightgray', 'lightgreen', 'lightgrey', 'lightpink', 'lightsalmon',
+  'lightseagreen', 'lightskyblue', 'lightslategray', 'lightslategrey', 'lightsteelblue', 'lightyellow', 'lime',
+  'limegreen', 'linen', 'magenta', 'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple',
+  'mediumseagreen', 'mediumslateblue', 'mediumspringgreen', 'mediumturquoise', 'mediumvioletred', 'midnightblue',
+  'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy', 'oldlace', 'olive', 'olivedrab', 'orange',
+  'orangered', 'orchid', 'palegoldenrod', 'palegreen', 'paleturquoise', 'palevioletred', 'papayawhip',
+  'peachpuff', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'rebeccapurple', 'red', 'rosybrown', 'royalblue',
+  'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue',
+  'slategray', 'slategrey', 'snow', 'springgreen', 'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise',
+  'violet', 'wheat', 'white', 'whitesmoke', 'yellow', 'yellowgreen',
+])
+
+function getSwatchColor(name: string): string {
+  const key = name.trim().toLowerCase()
+  if (COLOR_NAME_MAP[key]) return COLOR_NAME_MAP[key]
+  if (CSS_NAMED_COLORS.has(key)) return key
+  return '#ddd'
+}
+
+function ColorSwatch({ name }: { name: string }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+      <span
+        title={name}
+        style={{
+          display: 'inline-block',
+          width: 28,
+          height: 28,
+          borderRadius: 6,
+          background: getSwatchColor(name),
+          border: '1px solid #ccc',
+        }}
+      />
+      <span style={{ fontSize: '0.85rem', color: '#444' }}>{name}</span>
+    </div>
   )
 }
 
