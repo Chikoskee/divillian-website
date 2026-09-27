@@ -175,7 +175,7 @@ header a:hover { color: #fff; }
 .video-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
 .media-video { width: 100%; max-width: 380px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 .spinning-logo-container { text-align: center; }
-.spinning-logo-container img { max-width: 250px; height: auto; margin: 20px auto 0; }
+.spinning-logo-container img { max-width: 250px; height: auto; margin: 0 auto; display: block; }
 .spinning-logo-section { padding: 3rem 0; text-align: center; }
 
 /* ── Category Filter ── */
