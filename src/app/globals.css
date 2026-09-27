@@ -177,6 +177,7 @@ header a:hover { color: #fff; }
 .spinning-logo-container { text-align: center; }
 .spinning-logo-container img { max-width: 250px; height: auto; margin: 0 auto; display: block; }
 .spinning-logo-section { padding: 7rem 0 3rem; text-align: center; }
+.spinning-logo-section .spinning-logo-container img { max-width: 212px; }
 
 /* ── Category Filter ── */
 .category-filter-legend { text-align: center; color: #888; font-size: 0.85rem; font-style: italic; margin-bottom: 12px; }
